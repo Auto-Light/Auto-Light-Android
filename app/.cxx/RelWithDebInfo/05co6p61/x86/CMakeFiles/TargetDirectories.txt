@@ -1,0 +1,3 @@
+C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/RelWithDebInfo/05co6p61/x86/CMakeFiles/autolight.dir
+C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/RelWithDebInfo/05co6p61/x86/CMakeFiles/edit_cache.dir
+C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/RelWithDebInfo/05co6p61/x86/CMakeFiles/rebuild_cache.dir
