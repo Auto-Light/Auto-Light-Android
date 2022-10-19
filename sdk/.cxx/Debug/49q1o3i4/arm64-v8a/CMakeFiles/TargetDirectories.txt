@@ -1,0 +1,3 @@
+C:/Users/inbbo/AndroidStudioProjects/AutoLight2/sdk/.cxx/Debug/49q1o3i4/arm64-v8a/CMakeFiles/opencv_jni_shared.dir
+C:/Users/inbbo/AndroidStudioProjects/AutoLight2/sdk/.cxx/Debug/49q1o3i4/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/inbbo/AndroidStudioProjects/AutoLight2/sdk/.cxx/Debug/49q1o3i4/arm64-v8a/CMakeFiles/rebuild_cache.dir
