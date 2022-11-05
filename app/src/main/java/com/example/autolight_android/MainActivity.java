@@ -3,7 +3,11 @@ package com.example.autolight_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.autolight_android.R;
 import com.example.autolight_android.databinding.ActivityMainBinding;
@@ -25,6 +29,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         permissionCheck();
+
+        // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
+        /*ImageButton imageButton = findViewById(R.id.button1);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        */
     }
 
     // 권한 체크

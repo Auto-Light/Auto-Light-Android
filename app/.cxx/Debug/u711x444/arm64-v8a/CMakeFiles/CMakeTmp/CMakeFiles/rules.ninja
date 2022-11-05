@@ -6,15 +6,15 @@
 # It is included in the main 'build.ninja'.
 
 # =============================================================================
-# Project: autolight_android
-# Configurations: Debug
+# Project: CMAKE_TRY_COMPILE
+# Configurations: 
 # =============================================================================
 # =============================================================================
 
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__autolight_android_Debug
+rule CXX_COMPILER__cmTC_af041_
   depfile = $DEP_FILE
   deps = gcc
   command = C:\Users\inbbo\AppData\Local\Android\Sdk\ndk\23.1.7779620\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -22,11 +22,11 @@ rule CXX_COMPILER__autolight_android_Debug
 
 
 #############################################
-# Rule for linking CXX shared library.
+# Rule for linking CXX executable.
 
-rule CXX_SHARED_LIBRARY_LINKER__autolight_android_Debug
-  command = cmd.exe /C "$PRE_LINK && C:\Users\inbbo\AppData\Local\Android\Sdk\ndk\23.1.7779620\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot -fPIC $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS $LINK_FLAGS -shared $SONAME_FLAG$SONAME -o $TARGET_FILE $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
-  description = Linking CXX shared library $TARGET_FILE
+rule CXX_EXECUTABLE_LINKER__cmTC_af041_
+  command = cmd.exe /C "$PRE_LINK && C:\Users\inbbo\AppData\Local\Android\Sdk\ndk\23.1.7779620\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
+  description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
 
 
@@ -36,15 +36,6 @@ rule CXX_SHARED_LIBRARY_LINKER__autolight_android_Debug
 rule CUSTOM_COMMAND
   command = $COMMAND
   description = $DESC
-
-
-#############################################
-# Rule for re-running cmake.
-
-rule RERUN_CMAKE
-  command = C:\Users\inbbo\AppData\Local\Android\Sdk\cmake\3.18.1\bin\cmake.exe --regenerate-during-build -SC:\Users\inbbo\AndroidStudioProjects\AutoLight2\app\src\main\cpp -BC:\Users\inbbo\AndroidStudioProjects\AutoLight2\app\.cxx\Debug\u711x444\arm64-v8a
-  description = Re-running CMake...
-  generator = 1
 
 
 #############################################
