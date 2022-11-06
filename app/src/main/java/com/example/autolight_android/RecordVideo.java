@@ -20,10 +20,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
-    private int m_Camidx = 0; // front: 1, back: 0
+    private final int m_Camidx = 0; // front: 1, back: 0
     private CameraBridgeViewBase m_CameraView;
-
-    private Mat matInput;
 
     private static final int CAMERA_PERMISSION_CODE = 200;
     private static final String TAG = "opencv";
@@ -87,7 +85,7 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
         }
     }
 
-    private BaseLoaderCallback m_LoaderCallback = new BaseLoaderCallback(this) {
+    private final BaseLoaderCallback m_LoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
             if (status == LoaderCallbackInterface.SUCCESS) {
