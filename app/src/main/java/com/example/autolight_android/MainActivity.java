@@ -3,7 +3,6 @@ package com.example.autolight_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,31 +31,13 @@ public class MainActivity extends AppCompatActivity {
         permissionCheck();
 
         // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
-        /*ImageButton imageButton = findViewById(R.id.button1);
+        ImageButton imageButton = findViewById(R.id.button1);
         imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RecordVideo.class);
                 startActivity(intent);
-            }
-        });
-        */
-
-        ImageButton bluetoothButton = findViewById(R.id.button0);
-        bluetoothButton.setOnClickListener(new Button.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter()
-                if (btAdapter != null) {   // 블루투스 지원
-                    if(!btAdapter.isEnabled()){
-
-                    }
-                }else{ //블루투스 지원 불가
-
-
-                }
             }
         });
     }
