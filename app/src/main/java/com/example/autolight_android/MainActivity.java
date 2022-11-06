@@ -3,6 +3,7 @@ package com.example.autolight_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         */
+
+        ImageButton bluetoothButton = findViewById(R.id.button0);
+        bluetoothButton.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter()
+                if (btAdapter != null) {   // 블루투스 지원
+                    if(!btAdapter.isEnabled()){
+
+                    }
+                }else{ //블루투스 지원 불가
+
+
+                }
+            }
+        });
     }
 
     // 권한 체크
