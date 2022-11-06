@@ -31,16 +31,15 @@ public class MainActivity extends AppCompatActivity {
         permissionCheck();
 
         // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
-        /*ImageButton imageButton = findViewById(R.id.button1);
+        ImageButton imageButton = findViewById(R.id.button1);
         imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RecordVideo.class);
                 startActivity(intent);
             }
         });
-        */
     }
 
     // 권한 체크
