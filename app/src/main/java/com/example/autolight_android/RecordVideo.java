@@ -67,6 +67,26 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
         }
     }
 
+    // 미사용 시 카메라 할당 해제
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (m_CameraView != null) {
+            m_CameraView.disableView();
+        }
+    }
+
+    // 미사용 시 카메라 할당 해제
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (m_CameraView != null) {
+            m_CameraView.disableView();
+        }
+    }
+
     private BaseLoaderCallback m_LoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
