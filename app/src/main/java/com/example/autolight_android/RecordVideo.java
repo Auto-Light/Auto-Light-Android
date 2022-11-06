@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 
+import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
 import static android.Manifest.permission.CAMERA;
@@ -35,7 +39,7 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
         m_CameraView.setCameraIndex(m_Camidx);
     }
 
-    // 카메라 권한 받아오기
+    // 카메라 시작할 때 카메라 권한 받아오기
     @Override
     protected void onStart() {
         super.onStart();
@@ -52,6 +56,27 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
             onCameraPermissionGranted();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (OpenCVLoader.initDebug()) {
+            Log.d(TAG, "onResum :: OpenCV library found inside package. Using it!");
+            m_LoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+    }
+
+    private BaseLoaderCallback m_LoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            if (status == LoaderCallbackInterface.SUCCESS) {
+                m_CameraView.enableView();
+            } else {
+                super.onManagerConnected(status);
+            }
+        }
+    };
 
     private void onCameraPermissionGranted() {
         List<? extends CameraBridgeViewBase> cameraViews = getCameraViewList();
