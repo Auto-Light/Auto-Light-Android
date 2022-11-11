@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -20,21 +21,38 @@ import java.util.Collections;
 import java.util.List;
 
 public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
-    private final int m_Camidx = 0; // front: 1, back: 0
-    private CameraBridgeViewBase m_CameraView;
-
-    private static final int CAMERA_PERMISSION_CODE = 200;
     private static final String TAG = "opencv";
+    private CameraBridgeViewBase mOpenCvCameraView;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
+
+    static {
+        System.loadLibrary("native-lib");
+    }
+
+    private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            if (status == LoaderCallbackInterface.SUCCESS) {
+                mOpenCvCameraView.enableView();
+            } else {
+                super.onManagerConnected(status);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         setContentView(R.layout.activity_record_video);
 
-        m_CameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view);
-        m_CameraView.setVisibility(SurfaceView.VISIBLE);
-        m_CameraView.setCvCameraViewListener(this);
-        m_CameraView.setCameraIndex(m_Camidx);
+        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view);
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+        mOpenCvCameraView.setCvCameraViewListener(this);
+        mOpenCvCameraView.setCameraIndex(0); // back-camera(0), front-camera(1)
     }
 
     // 카메라 시작할 때 카메라 권한 받아오기
@@ -45,7 +63,7 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{CAMERA}, CAMERA_PERMISSION_CODE);
+                requestPermissions(new String[]{CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
                 _Permission = false;
             }
         }
@@ -55,23 +73,26 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (OpenCVLoader.initDebug()) {
-            Log.d(TAG, "onResum :: OpenCV library found inside package. Using it!");
-            m_LoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
-    }
-
     // 미사용 시 카메라 할당 해제
     @Override
     public void onPause() {
         super.onPause();
 
-        if (m_CameraView != null) {
-            m_CameraView.disableView();
+        if (mOpenCvCameraView != null) {
+            mOpenCvCameraView.disableView();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (OpenCVLoader.initDebug()) {
+            Log.d(TAG, "onResume::OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        } else {
+            Log.d(TAG, "onResume::Internal OpenCV library not found.");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, mLoaderCallback);
         }
     }
 
@@ -80,22 +101,13 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
     public void onDestroy() {
         super.onDestroy();
 
-        if (m_CameraView != null) {
-            m_CameraView.disableView();
+        if (mOpenCvCameraView != null) {
+            mOpenCvCameraView.disableView();
         }
     }
 
-    private final BaseLoaderCallback m_LoaderCallback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            if (status == LoaderCallbackInterface.SUCCESS) {
-                m_CameraView.enableView();
-            } else {
-                super.onManagerConnected(status);
-            }
-        }
-    };
 
+    // 카메라 권한 관련 메소드
     private void onCameraPermissionGranted() {
         List<? extends CameraBridgeViewBase> cameraViews = getCameraViewList();
 
@@ -111,7 +123,7 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
     }
 
     private List<? extends CameraBridgeViewBase> getCameraViewList() {
-        return Collections.singletonList(m_CameraView);
+        return Collections.singletonList(mOpenCvCameraView);
     }
 
     @Override
@@ -124,8 +136,9 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
 
     }
 
+    // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        return null;
+        return inputFrame.rgba();
     }
 }
