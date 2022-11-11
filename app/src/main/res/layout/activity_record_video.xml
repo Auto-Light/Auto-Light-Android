@@ -4,21 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
-    android:background="#F1F1F1"
     tools:context=".RecordVideo">
 
     <org.opencv.android.JavaCameraView
         android:id="@+id/activity_surface_view"
-        android:layout_width="316dp"
-        android:layout_height="242dp"
+        android:layout_width="412dp"
+        android:layout_height="282dp"
         android:visibility="visible"
         opencv:camera_id="any"
         opencv:layout_constraintBottom_toBottomOf="parent"
         opencv:layout_constraintEnd_toEndOf="parent"
-        opencv:layout_constraintHorizontal_bias="0.494"
         opencv:layout_constraintStart_toStartOf="parent"
         opencv:layout_constraintTop_toTopOf="parent"
-        opencv:layout_constraintVertical_bias="0.29" />
+        opencv:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
