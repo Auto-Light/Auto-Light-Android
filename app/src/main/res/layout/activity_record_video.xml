@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="기준값 설정"
+        android:textColor="#3E3E3E"
         android:textSize="20sp"
         android:textStyle="bold"
         opencv:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +52,7 @@
         android:layout_marginTop="96dp"
         android:gravity="center"
         android:text="얼굴을 잘 인식할 수 있도록\n얼굴을 가리는 물건(마스크, 선글라스 등)\n은 최대한 피해주세요."
+        android:textColor="#3E3E3E"
         android:textSize="16sp"
         opencv:layout_constraintEnd_toEndOf="parent"
         opencv:layout_constraintStart_toStartOf="parent"
@@ -83,13 +85,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="확인"
+        android:textColor="#3E3E3E"
         android:textStyle="bold"
         opencv:layout_constraintBottom_toBottomOf="@+id/ok_button"
         opencv:layout_constraintEnd_toEndOf="@+id/ok_button"
         opencv:layout_constraintHorizontal_bias="0.741"
         opencv:layout_constraintStart_toStartOf="@+id/ok_button"
         opencv:layout_constraintTop_toTopOf="@+id/ok_button"
-        opencv:layout_constraintVertical_bias="0.5" />
+        opencv:layout_constraintVertical_bias="0.473" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
