@@ -67,5 +67,29 @@
         opencv:layout_constraintEnd_toEndOf="parent"
         opencv:layout_constraintStart_toStartOf="parent" />
 
+    <ImageButton
+        android:id="@+id/ok_button"
+        android:layout_width="84dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
+        opencv:layout_constraintBottom_toBottomOf="parent"
+        opencv:layout_constraintEnd_toEndOf="parent"
+        opencv:layout_constraintHorizontal_bias="0.498"
+        opencv:layout_constraintStart_toStartOf="parent"
+        opencv:srcCompat="@drawable/record_ok_button" />
+
+    <TextView
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textStyle="bold"
+        opencv:layout_constraintBottom_toBottomOf="@+id/ok_button"
+        opencv:layout_constraintEnd_toEndOf="@+id/ok_button"
+        opencv:layout_constraintHorizontal_bias="0.741"
+        opencv:layout_constraintStart_toStartOf="@+id/ok_button"
+        opencv:layout_constraintTop_toTopOf="@+id/ok_button"
+        opencv:layout_constraintVertical_bias="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
