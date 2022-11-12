@@ -8,7 +8,7 @@
 					"build" : ".",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.6.0"
+						"string" : "3.4.1"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -26,7 +26,7 @@
 					[
 						0
 					],
-					"name" : "autolight_android",
+					"name" : "Project",
 					"targetIndexes" : 
 					[
 						0
@@ -37,9 +37,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "autolight_android::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-autolight_android-Debug-a69f51cb0953e82308f3.json",
-					"name" : "autolight_android",
+					"id" : "native-lib::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-native-lib-Debug-3d109fbc36a14bdd5d91.json",
+					"name" : "native-lib",
 					"projectIndex" : 0
 				}
 			]
@@ -48,7 +48,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/x86",
+		"build" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/x86_64",
 		"source" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/src/main/cpp"
 	},
 	"version" : 

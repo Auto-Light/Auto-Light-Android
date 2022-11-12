@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/build/intermediates/cxx/Debug/u711x444/obj/x86/libautolight_android.so"
+			"path" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/build/intermediates/cxx/Debug/u711x444/obj/x86_64/libnative-lib.so"
 		}
 	],
 	"backtrace" : 1,
@@ -10,7 +10,9 @@
 	{
 		"commands" : 
 		[
-			"add_library"
+			"add_library",
+			"target_link_libraries",
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -24,7 +26,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 17,
+				"line" : 23,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 56,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 15,
 				"parent" : 0
 			}
 		]
@@ -35,13 +49,20 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC"
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu++11 -fno-limit-debug-info  -fPIC"
 				}
 			],
 			"defines" : 
 			[
 				{
-					"define" : "autolight_android_EXPORTS"
+					"define" : "native_lib_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/sdk/native/jni/include"
 				}
 			],
 			"language" : "CXX",
@@ -55,7 +76,7 @@
 			}
 		}
 	],
-	"id" : "autolight_android::@6890427a1f51a3e7e1df",
+	"id" : "native-lib::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -63,6 +84,11 @@
 			{
 				"fragment" : "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\sdk\\native\\libs\\x86_64\\libopencv_java4.so",
+				"role" : "libraries"
 			},
 			{
 				"fragment" : "-llog",
@@ -79,8 +105,8 @@
 			"path" : "C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
 		}
 	},
-	"name" : "autolight_android",
-	"nameOnDisk" : "libautolight_android.so",
+	"name" : "native-lib",
+	"nameOnDisk" : "libnative-lib.so",
 	"paths" : 
 	{
 		"build" : ".",

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="#F1F1F1"
     android:orientation="vertical"
     tools:context=".RecordVideo">
 
@@ -35,7 +35,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:text="기준값 설정"
         android:textSize="20sp"
         android:textStyle="bold"

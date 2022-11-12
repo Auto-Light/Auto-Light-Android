@@ -17,12 +17,14 @@
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
-    "autolight_android::@6890427a1f51a3e7e1df": {
+    "native-lib::@6890427a1f51a3e7e1df": {
       "toolchain": "toolchain",
       "abi": "x86",
-      "artifactName": "autolight_android",
-      "output": "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\app\\build\\intermediates\\cxx\\Debug\\u711x444\\obj\\x86\\libautolight_android.so",
-      "runtimeFiles": []
+      "artifactName": "native-lib",
+      "output": "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\app\\build\\intermediates\\cxx\\Debug\\u711x444\\obj\\x86\\libnative-lib.so",
+      "runtimeFiles": [
+        "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\sdk\\native\\libs\\x86\\libopencv_java4.so"
+      ]
     }
   },
   "toolchains": {
