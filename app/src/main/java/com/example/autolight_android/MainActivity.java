@@ -36,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 밝기 조정 버튼 눌렀을 때 ControlLight activity로 이동
+        ImageButton imageButton2 = findViewById(R.id.button2);
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ControlLight.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // 권한 체크

@@ -118,7 +118,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_EXPORT_COMPILE_COMMANDS:UNINITIALIZED=ON
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/autolight_android
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/Project
 
 //No help, variable specified on the command line.
 CMAKE_LIBRARY_OUTPUT_DIRECTORY:UNINITIALIZED=C:\Users\hayou\Project\AutoLight-Android\app\build\intermediates\cxx\Debug\2i6r611g\obj\x86_64
@@ -230,8 +230,8 @@ CMAKE_SYSTEM_NAME:UNINITIALIZED=Android
 //No help, variable specified on the command line.
 CMAKE_SYSTEM_VERSION:UNINITIALIZED=21
 
-//No help, variable specified on the command line.
-CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=C:\Users\hayou\AppData\Local\Android\Sdk\ndk\23.1.7779620\build\cmake\android.toolchain.cmake
+//The CMake toolchain file
+CMAKE_TOOLCHAIN_FILE:FILEPATH=C:/Users/hayou/AppData/Local/Android/Sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -244,12 +244,6 @@ Project_BINARY_DIR:STATIC=C:/Users/hayou/Project/AutoLight-Android/app/.cxx/Debu
 
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=C:/Users/hayou/Project/AutoLight-Android/app/src/main/cpp
-
-//Value Computed by CMake
-autolight_android_BINARY_DIR:STATIC=C:/Users/hayou/Project/AutoLight-Android/app/.cxx/Debug/2i6r611g/x86_64
-
-//Value Computed by CMake
-autolight_android_SOURCE_DIR:STATIC=C:/Users/hayou/Project/AutoLight-Android/app/src/main/cpp
 
 //Path to a library.
 log-lib:FILEPATH=C:/Users/hayou/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/x86_64-linux-android/21/liblog.so

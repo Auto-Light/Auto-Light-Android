@@ -1,5 +1,3 @@
 # ninja log v5
-2	2038	687946127	CMakeFiles/autolight_android.dir/native-lib.cpp.o	325bc026e961a7b0
-2042	2452	687946128	C:/Users/hayou/Project/AutoLight-Android/app/build/intermediates/cxx/Debug/2i6r611g/obj/x86_64/libautolight_android.so	fe4e58c395ba92cb
-4	2277	689861410	CMakeFiles/native-lib.dir/native-lib.cpp.o	25addf87c265066a
-2277	3031	689861411	C:/Users/hayou/Project/AutoLight-Android/app/build/intermediates/cxx/Debug/2i6r611g/obj/x86_64/libnative-lib.so	b753a21797cbfb4c
+2	2837	690063071	CMakeFiles/native-lib.dir/native-lib.cpp.o	25addf87c265066a
+2840	3242	690063071	C:/Users/hayou/Project/AutoLight-Android/app/build/intermediates/cxx/Debug/2i6r611g/obj/x86_64/libnative-lib.so	b753a21797cbfb4c

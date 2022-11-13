@@ -4,27 +4,30 @@
     <!-- 권한 요청 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 카메라 사용 기능 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="false" />
 
-    <!-- 카메라 사용 기능 -->
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.front.autofocus" android:required="false" />
-
-    <supports-screens android:resizeable="true"
-        android:smallScreens="true"
-        android:normalScreens="true"
+    <supports-screens
+        android:anyDensity="true"
         android:largeScreens="true"
-        android:anyDensity="true" />
-
-    <!-- 블루투스 권한 요청 -->
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" /> <!-- 블루투스 권한 요청 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <!-- SDK 30 이하를 타겟팅 하는 앱 Bluetooth 권한 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- SDK 30 이하를 타겟팅 하는 앱 Bluetooth 권한 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- SDK 31 이상을 타겟팅 하는 앱 Bluetooth 권한 (Android 12+) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- SDK 31 이상을 타겟팅 하는 앱 Bluetooth 권한 (Android 12+) -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
@@ -38,6 +41,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoLightAndroid"
         tools:targetApi="31">
+        <activity
+            android:name=".ControlLight"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".RecordVideo"
             android:configChanges="keyboardHidden|orientation"
