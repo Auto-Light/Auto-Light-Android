@@ -54,7 +54,7 @@ public class ControlLight extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view2);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        mOpenCvCameraView.setCameraIndex(0); // back-camera(0), front-camera(1)
+        mOpenCvCameraView.setCameraIndex(1); // back-camera(0), front-camera(1)
 
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
