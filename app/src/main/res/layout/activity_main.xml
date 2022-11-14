@@ -149,6 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginTop="8dp"
+        android:textColor="#575757"
         android:text="자신에게 맞는\n밝기 기준값을 결정합니다."
         app:layout_constraintStart_toStartOf="@+id/button1"
         app:layout_constraintTop_toBottomOf="@+id/setting" />
@@ -172,6 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginTop="8dp"
+        android:textColor="#575757"
         android:text="설정한 밝기 기준값에 따라\n조명 밝기를 조정합니다."
         app:layout_constraintStart_toStartOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/light" />

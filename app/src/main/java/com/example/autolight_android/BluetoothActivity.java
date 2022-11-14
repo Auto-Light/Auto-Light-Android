@@ -61,6 +61,8 @@ public class BluetoothActivity extends AppCompatActivity {
         deviceAddressArray = new ArrayList<>();
         list.setAdapter(btArrayAdapter);
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         bluetooth();
 
         back.setOnClickListener(new View.OnClickListener() {

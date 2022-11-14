@@ -4,7 +4,8 @@
     <!-- 권한 요청 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 카메라 사용 기능 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 카메라 사용 기능 -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -23,7 +24,8 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
-        android:smallScreens="true" /> <!-- 블루투스 권한 요청 -->
+        android:smallScreens="true" />
+    <!-- 블루투스 권한 요청 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- SDK 30 이하를 타겟팅 하는 앱 Bluetooth 권한 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
