@@ -19,6 +19,8 @@ import org.opencv.core.Mat;
 
 import static android.Manifest.permission.CAMERA;
 
+import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class ControlLight extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view2);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        mOpenCvCameraView.setCameraIndex(1); // back-camera(0), front-camera(1)
+        mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
 
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
