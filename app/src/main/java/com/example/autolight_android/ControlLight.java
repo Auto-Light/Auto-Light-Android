@@ -22,7 +22,7 @@ import static android.Manifest.permission.CAMERA;
 import java.util.Collections;
 import java.util.List;
 
-public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class ControlLight extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "opencv";
     private CameraBridgeViewBase mOpenCvCameraView;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
@@ -49,9 +49,9 @@ public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBa
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_record_video);
+        setContentView(R.layout.activity_control_light);
 
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view1);
+        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view2);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(0); // back-camera(0), front-camera(1)

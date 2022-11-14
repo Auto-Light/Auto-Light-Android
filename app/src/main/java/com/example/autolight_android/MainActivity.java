@@ -1,10 +1,5 @@
 package com.example.autolight_android;
 
-import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -29,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("autolight_android");
     }
 
-    // 권한요청 변수
+    // 클래스 선언
     private PermissionSupport permission;
 
     @Override
@@ -43,9 +38,21 @@ public class MainActivity extends AppCompatActivity {
         // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
         ImageButton imageButton = findViewById(R.id.button1);
         imageButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RecordVideo.class);
+                startActivity(intent);
+            }
+        });
+
+        // 밝기 조정 버튼 눌렀을 때 ControlLight activity로 이동
+        ImageButton imageButton2 = findViewById(R.id.button2);
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ControlLight.class);
                 startActivity(intent);
             }
         });
@@ -62,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
 
     // 권한 체크
     private void permissionCheck() {
+
         // PermissionSupport.java 클래스 객체 생성
         permission = new PermissionSupport(this, this);
+
         // 권한 체크 후 리턴이 false로 들어오면
-        if (!permission.checkPermission()) {
+        if (!permission.checkPermission()){
             //권한 요청
             permission.requestPermission();
         }
@@ -74,13 +83,12 @@ public class MainActivity extends AppCompatActivity {
     // Request Permission에 대한 결과 값 받아와
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        // 여기서도 리턴이 false로 들어온다면 (사용자가 권한 허용 거부)
+        //여기서도 리턴이 false로 들어온다면 (사용자가 권한 허용 거부)
         if (!permission.permissionResult(requestCode, permissions, grantResults)) {
             // 다시 permission 요청
             permission.requestPermission();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
 
 }
