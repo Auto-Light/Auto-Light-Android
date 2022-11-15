@@ -83,7 +83,6 @@
         android:layout_height="wrap_content"
         android:text="기기 검색"
         android:textColor="#3E3E3E"
-        android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.5"

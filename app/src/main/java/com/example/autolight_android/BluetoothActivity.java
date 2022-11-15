@@ -47,6 +47,10 @@ public class BluetoothActivity extends AppCompatActivity {
     ImageButton search;
     ListView list;
 
+    private ConnectedThread connectedThread;
+    BluetoothSocket btSocket = null;
+    boolean flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +140,11 @@ public class BluetoothActivity extends AppCompatActivity {
             btAdapter.cancelDiscovery();}
         // 기기 검색 시작
         btAdapter.startDiscovery();
+        btArrayAdapter.clear();
+        Toast.makeText(getApplicationContext(), "기기 검색을 시작합니다.", Toast.LENGTH_LONG).show();
+        if (deviceAddressArray != null && !deviceAddressArray.isEmpty()) {
+            deviceAddressArray.clear();
+        }
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver, filter);
     }
@@ -148,11 +157,13 @@ public class BluetoothActivity extends AppCompatActivity {
                 // Discovery has found a device. Get the BluetoothDevice
                 // object and its info from the Intent.
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (ActivityCompat.checkSelfPermission(BluetoothActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(BluetoothActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                     ActivityCompat.requestPermissions(BluetoothActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                }
                 String deviceName = device.getName();
                 String deviceHardwareAddress = device.getAddress(); // MAC address
+                btArrayAdapter.add(deviceName);
+                deviceAddressArray.add(deviceHardwareAddress);
+                btArrayAdapter.notifyDataSetChanged();
             }
         }
     };
@@ -165,40 +176,43 @@ public class BluetoothActivity extends AppCompatActivity {
     }
 
     public class myOnItemClickListener implements AdapterView.OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
             Toast.makeText(getApplicationContext(), btArrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
 
             final String name = btArrayAdapter.getItem(position); // get name
             final String address = deviceAddressArray.get(position); // get address
-            boolean flag = true;
 
-            BluetoothDevice device = btAdapter.getRemoteDevice(address);
-            BluetoothSocket btSocket = null;
-
-            // create & connect socket
-            try {
-                if (ActivityCompat.checkSelfPermission(BluetoothActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(BluetoothActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            new Thread() {
+                public void run(){
+                    flag = true;
+                    BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                    // create & connect socket
+                    try {
+                        if (ActivityCompat.checkSelfPermission(BluetoothActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(BluetoothActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                        }
+                        btSocket = createBluetoothSocket(device);
+                        btSocket.connect();
+                    } catch (IOException e) {
+                        try {
+                            flag = false;
+                            btSocket.close();
+                        } catch (IOException e2) {
+                            Toast.makeText(getApplicationContext(), "연결에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                    }
+                    if(flag){
+                        connectedThread = new ConnectedThread(btSocket);
+                        connectedThread.start();
+                        Toast.makeText(getApplicationContext(), name + " 연결에 성공하였습니다.", Toast.LENGTH_LONG).show();
+                    }
                 }
-                btSocket = createBluetoothSocket(device);
-                btSocket.connect();
-            } catch (IOException e) {
-                flag = false;
-                Toast.makeText(getApplicationContext(), "연결에 실패하였습니다.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-            if(flag){
-                ConnectedThread connectedThread = new ConnectedThread(btSocket);
-                connectedThread.start();
-                Toast.makeText(getApplicationContext(), "연결에 성공하였습니다.", Toast.LENGTH_LONG).show();
-            }
-
+            }.start();
         }
     }
+
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         if (ActivityCompat.checkSelfPermission(BluetoothActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(BluetoothActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
@@ -211,5 +225,4 @@ public class BluetoothActivity extends AppCompatActivity {
         }
         return  device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
     }
-
 }
