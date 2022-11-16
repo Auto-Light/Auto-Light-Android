@@ -1,0 +1,40 @@
+{
+  "buildFiles": [
+    "C:\\Users\\hayou\\Project\\AutoLight\\AutoLight-Android\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\hayou\\AppData\\Local\\Android\\Sdk\\cmake\\3.18.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\hayou\\Project\\AutoLight\\AutoLight-Android\\app\\.cxx\\Debug\\4y6z4j4s\\x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\hayou\\AppData\\Local\\Android\\Sdk\\cmake\\3.18.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\hayou\\Project\\AutoLight\\AutoLight-Android\\app\\.cxx\\Debug\\4y6z4j4s\\x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "native-lib::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86",
+      "artifactName": "native-lib",
+      "output": "C:\\Users\\hayou\\Project\\AutoLight\\AutoLight-Android\\app\\build\\intermediates\\cxx\\Debug\\4y6z4j4s\\obj\\x86\\libnative-lib.so",
+      "runtimeFiles": [
+        "C:\\Users\\hayou\\Project\\AutoLight\\AutoLight-Android\\sdk\\native\\libs\\x86\\libopencv_java4.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Users\\hayou\\AppData\\Local\\Android\\Sdk\\ndk\\23.1.7779620\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\hayou\\AppData\\Local\\Android\\Sdk\\ndk\\23.1.7779620\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

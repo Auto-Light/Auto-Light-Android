@@ -33,6 +33,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
 
     static {
         System.loadLibrary("native-lib");
+        System.loadLibrary("opencv_java4");
     }
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {

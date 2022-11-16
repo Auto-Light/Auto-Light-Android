@@ -33,6 +33,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
     static {
         System.loadLibrary("native-lib");
+        System.loadLibrary("opencv_java4");
     }
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
