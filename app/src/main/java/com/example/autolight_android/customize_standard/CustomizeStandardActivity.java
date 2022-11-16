@@ -54,7 +54,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_record_video);
+        setContentView(R.layout.activity_customize_standard);
 
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view1);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
