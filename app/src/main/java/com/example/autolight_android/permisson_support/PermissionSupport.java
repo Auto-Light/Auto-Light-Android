@@ -1,4 +1,4 @@
-package com.example.autolight_android;
+package com.example.autolight_android.permisson_support;
 
 import android.Manifest;
 import android.app.Activity;

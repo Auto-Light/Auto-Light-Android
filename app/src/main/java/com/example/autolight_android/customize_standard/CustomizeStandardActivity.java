@@ -1,4 +1,4 @@
-package com.example.autolight_android;
+package com.example.autolight_android.customize_standard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,10 +21,12 @@ import static android.Manifest.permission.CAMERA;
 
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
+import com.example.autolight_android.R;
+
 import java.util.Collections;
 import java.util.List;
 
-public class RecordVideo extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class CustomizeStandardActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "opencv";
     private CameraBridgeViewBase mOpenCvCameraView;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
