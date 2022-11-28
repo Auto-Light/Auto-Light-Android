@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     // 클래스 선언
     private PermissionSupport permission;
 
+    private BluetoothConnect btConnect;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
         ImageButton imageButton = findViewById(R.id.button1);
         imageButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RecordVideo.class);
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         // 밝기 조정 버튼 눌렀을 때 ControlLight activity로 이동
         ImageButton imageButton2 = findViewById(R.id.button2);
         imageButton2.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ControlLight.class);
@@ -61,10 +61,16 @@ public class MainActivity extends AppCompatActivity {
         btButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BluetoothActivity.class);
-                startActivity(intent);
+                // Intent intent = new Intent(getApplicationContext(), BluetoothActivity.class);
+                // s tartActivity(intent);
+                bluetoothClick();
             }
         });
+    }
+
+    private void bluetoothClick() {
+        btConnect = new BluetoothConnect(this,this);
+        btConnect.start();
     }
 
     // 권한 체크
@@ -72,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         // PermissionSupport.java 클래스 객체 생성
         permission = new PermissionSupport(this, this);
-
         // 권한 체크 후 리턴이 false로 들어오면
         if (!permission.checkPermission()){
             //권한 요청
