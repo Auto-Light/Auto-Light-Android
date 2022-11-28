@@ -19,7 +19,7 @@
     </group>
     <group android:translateX="5.5" android:translateY="5.5">
         <path
-            android:fillColor="#3C3C3C"
+            android:fillColor="#3E3E3E"
             android:pathData="M10.6,12.71a1,1,0,0,1,0-1.42l4.59-4.58a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0L9.19,9.88a3,3,0,0,0,0,4.24l4.59,4.59a1,1,0,0,0,0.7,0.29,1,1,0,0,0,0.71-0.29,1,1,0,0,0,0-1.42Z"
             />
     </group>

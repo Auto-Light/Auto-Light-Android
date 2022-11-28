@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "x86"
+			"value" : "arm64-v8a"
 		},
 		{
 			"name" : "ANDROID_NDK",
@@ -63,7 +63,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "x86"
+			"value" : "arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_ANDROID_NDK",
@@ -151,7 +151,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/x86"
+			"value" : "c:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -224,6 +224,22 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "C:/Users/inbbo/AppData/Local/Android/Sdk/cmake/3.18.1/bin/ctest.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "(This variable does not exist and should not be used)"
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_AR",
@@ -352,6 +368,22 @@
 			],
 			"type" : "STRING",
 			"value" : "-latomic -lm"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "(This variable does not exist and should not be used)"
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_C_COMPILER_AR",
@@ -671,7 +703,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/autolight_android"
+			"value" : "C:/Program Files (x86)/Project"
 		},
 		{
 			"name" : "CMAKE_INSTALL_SO_NO_EXE",
@@ -695,7 +727,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\app\\build\\intermediates\\cxx\\Debug\\u711x444\\obj\\x86"
+			"value" : "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\app\\build\\intermediates\\cxx\\Debug\\u711x444\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -911,7 +943,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "autolight_android"
+			"value" : "Project"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -967,7 +999,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\app\\build\\intermediates\\cxx\\Debug\\u711x444\\obj\\x86"
+			"value" : "C:\\Users\\inbbo\\AndroidStudioProjects\\AutoLight2\\app\\build\\intermediates\\cxx\\Debug\\u711x444\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1230,7 +1262,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "autolight_android_BINARY_DIR",
+			"name" : "Project_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1239,10 +1271,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/x86"
+			"value" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/arm64-v8a"
 		},
 		{
-			"name" : "autolight_android_SOURCE_DIR",
+			"name" : "Project_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1263,7 +1295,19 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/i686-linux-android/21/liblog.so"
+			"value" : "C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/21/liblog.so"
+		},
+		{
+			"name" : "native-lib_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;lib_opencv;general;C:/Users/inbbo/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/21/liblog.so;"
 		}
 	],
 	"kind" : "cache",
