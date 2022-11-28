@@ -17,6 +17,10 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.example.autolight_android.control_light.ControlLightActivity;
+import com.example.autolight_android.customize_standard.CustomizeStandardActivity;
+import com.example.autolight_android.permisson_support.PermissionSupport;
+
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'autolight_android' library on application startup.
@@ -42,17 +46,17 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RecordVideo.class);
+                Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
                 startActivity(intent);
             }
         });
 
-        // 밝기 조정 버튼 눌렀을 때 ControlLight activity로 이동
+        // 밝기 조정 버튼 눌렀을 때 ControlLightActivity activity로 이동
         ImageButton imageButton2 = findViewById(R.id.button2);
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ControlLight.class);
+                Intent intent = new Intent(getApplicationContext(), ControlLightActivity.class);
                 startActivity(intent);
             }
         });

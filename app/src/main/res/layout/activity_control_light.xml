@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:background="#F1F1F1"
     android:orientation="vertical"
-    tools:context=".RecordVideo">
+    tools:context=".customize_standard.CustomizeStandardActivity">
 
     <org.opencv.android.JavaCameraView
         android:id="@+id/activity_surface_view2"
-        android:layout_width="412dp"
-        android:layout_height="282dp"
+        android:layout_width="411dp"
+        android:layout_height="335dp"
         android:visibility="visible"
         opencv:camera_id="any"
         opencv:layout_constraintBottom_toBottomOf="parent"
