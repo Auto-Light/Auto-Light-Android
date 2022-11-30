@@ -1,16 +1,19 @@
-package com.example.autolight_android;
+package com.example.autolight_android.bluetooth;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 public class ConnectedThread extends Thread {
     private final BluetoothSocket mmSocket;
     private final InputStream mmInStream;
     private final OutputStream mmOutStream;
+    public String readMessage;
 
     public ConnectedThread(BluetoothSocket socket) {
         mmSocket = socket;
@@ -23,6 +26,7 @@ public class ConnectedThread extends Thread {
             tmpIn = socket.getInputStream();
             tmpOut = socket.getOutputStream();
         } catch (IOException e) {
+            e.printStackTrace();
         }
         mmInStream = tmpIn;
         mmOutStream = tmpOut;
@@ -38,10 +42,15 @@ public class ConnectedThread extends Thread {
                 // Read from the InputStream
                 bytes = mmInStream.available();
                 if (bytes != 0) {
-                    buffer = new byte[1024];
                     SystemClock.sleep(100); //pause and wait for rest of data. Adjust this depending on your sending speed.
                     bytes = mmInStream.available(); // how many bytes are ready to be read?
                     bytes = mmInStream.read(buffer, 0, bytes); // record how many bytes we actually read
+                    readMessage = new String(buffer, StandardCharsets.US_ASCII);
+                    int endIndex = readMessage.indexOf("\r\n");
+                    if(endIndex > 0){
+                        readMessage = readMessage.substring(0, endIndex); // Extract string
+                    }
+                    Log.d("Arduino",readMessage);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -52,10 +61,13 @@ public class ConnectedThread extends Thread {
 
     /* Call this from the main activity to send data to the remote device */
     public void write(String input) {
+        String sendMessage = input;
         byte[] bytes = input.getBytes();           //converts entered String into bytes
         try {
             mmOutStream.write(bytes);
+        Log.d("Arduino",input);
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -64,6 +76,7 @@ public class ConnectedThread extends Thread {
         try {
             mmSocket.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

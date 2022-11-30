@@ -10,6 +10,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -19,6 +21,7 @@ import org.opencv.core.Mat;
 
 import static android.Manifest.permission.CAMERA;
 
+import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
 import com.example.autolight_android.R;
@@ -61,6 +64,29 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
 
+        SeekBar seekBar = findViewById(R.id.seekBar);
+        TextView seekText = findViewById(R.id.seekText);
+
+        btThread.write("65c");
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                seekText.setText(String.valueOf(progress));
+                btThread.write(String.valueOf(seekBar.getProgress())+"c");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                seekText.setText(String.valueOf(seekBar.getProgress()));
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekText.setText(String.valueOf(seekBar.getProgress()));
+            }
+        });
+
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +94,15 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
                 finish();
             }
         });
+
+        ImageButton okButton = findViewById(R.id.ok_button);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     // 카메라 시작할 때 카메라 권한 받아오기
