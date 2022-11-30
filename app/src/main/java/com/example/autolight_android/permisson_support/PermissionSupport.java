@@ -9,10 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PermissionSupport {
+public class PermissionSupport{
     private Context context;
     private Activity activity;
 

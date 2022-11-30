@@ -1,22 +1,17 @@
 package com.example.autolight_android;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import java.util.ArrayList;
-import java.util.Set;
-
+import com.example.autolight_android.bluetooth.BluetoothConnect;
+import com.example.autolight_android.bluetooth.ConnectedThread;
 import com.example.autolight_android.control_light.ControlLightActivity;
 import com.example.autolight_android.customize_standard.CustomizeStandardActivity;
 import com.example.autolight_android.permisson_support.PermissionSupport;
@@ -30,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     // 클래스 선언
     private PermissionSupport permission;
-
     private BluetoothConnect btConnect;
+    @SuppressLint("StaticFieldLeak")
+    public static ConnectedThread btThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
-                startActivity(intent);
+                if(btConnect != null && btConnect.isBluetoothConnect()){
+                    if(btThread == null){
+                        btThread = btConnect.btThread;
+                    }
+                    Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "블루투스 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -56,8 +60,16 @@ public class MainActivity extends AppCompatActivity {
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ControlLightActivity.class);
-                startActivity(intent);
+                if(btConnect != null && btConnect.isBluetoothConnect()){
+                    if(btThread == null){
+                        btThread = btConnect.btThread;
+                    }
+                    Intent intent = new Intent(getApplicationContext(), ControlLightActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "블루투스 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -65,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         btButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent = new Intent(getApplicationContext(), BluetoothActivity.class);
-                // s tartActivity(intent);
                 bluetoothClick();
             }
         });
@@ -75,11 +85,11 @@ public class MainActivity extends AppCompatActivity {
     private void bluetoothClick() {
         btConnect = new BluetoothConnect(this,this);
         btConnect.start();
+        btThread = btConnect.btThread;
     }
 
     // 권한 체크
     private void permissionCheck() {
-
         // PermissionSupport.java 클래스 객체 생성
         permission = new PermissionSupport(this, this);
         // 권한 체크 후 리턴이 false로 들어오면
@@ -99,5 +109,4 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
 }
