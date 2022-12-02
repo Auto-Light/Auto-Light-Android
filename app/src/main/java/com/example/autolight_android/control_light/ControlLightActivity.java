@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -22,6 +23,8 @@ import static android.Manifest.permission.CAMERA;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
 import com.example.autolight_android.R;
+import com.example.autolight_android.database.DBHelper;
+import com.example.autolight_android.database.StandardItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,11 +33,16 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private static final String TAG = "opencv";
     private CameraBridgeViewBase mOpenCvCameraView;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
+    private DBHelper mDBHelper;
+    private StandardItem mStandardItem;
+    private int mLampDial;
 
     static {
         System.loadLibrary("native-lib");
         System.loadLibrary("opencv_java4");
     }
+
+    public native int getLight(long matAddrInput);
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -60,6 +68,13 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
+
+        mDBHelper = new DBHelper(this);
+        mStandardItem = new StandardItem();
+        mStandardItem = mDBHelper.getStandard();
+
+        mLampDial = mStandardItem.getLampDial();
+        // 블루투스로 조명에 mLampDial 값 전송 - mLampDial은 int형입니다!
 
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +169,36 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        return inputFrame.rgba();
+        Mat inputMat = inputFrame.rgba();
+        Mat screenMat = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
+
+        int stLight = mStandardItem.getStLight();
+        int nowLight = getLight(inputMat.getNativeObjAddr());
+
+        // 적정 밝기로 조명 조절을 완료한 경우
+        if (nowLight == stLight) {
+            mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
+            Toast.makeText(getApplicationContext(), "조명 조절을 완료하였습니다.", Toast.LENGTH_LONG).show();
+            finish();   // 현재 액티비티 종료
+        }
+
+        // 조명 밝기를 더이상 조절할 수 없는 경우
+        if (mLampDial <= 25 || mLampDial >= 100) {
+            mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
+            Toast.makeText(getApplicationContext(), "더이상 조명을 조절할 수 없습니다.", Toast.LENGTH_LONG).show();
+            finish();   // 현재 액티비티 종료
+        }
+        else if (nowLight > stLight) {
+            // 조명 밝기 낮추기
+            mLampDial--;
+            // 블루투스로 mLampDial 값 전송
+        }
+        else if (nowLight < stLight) {
+            // 조명 밝기 높이기
+            mLampDial++;
+            // 블루투스로 mLampDial 값 전송
+        }
+
+        return screenMat;
     }
 }
