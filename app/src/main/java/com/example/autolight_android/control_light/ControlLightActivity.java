@@ -20,6 +20,7 @@ import org.opencv.core.Mat;
 
 import static android.Manifest.permission.CAMERA;
 
+import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
 import com.example.autolight_android.R;
@@ -74,7 +75,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         mStandardItem = mDBHelper.getStandard();
 
         mLampDial = mStandardItem.getLampDial();
-        // 블루투스로 조명에 mLampDial 값 전송 - mLampDial은 int형입니다!
+        btThread.write(String.valueOf(mLampDial)+"c");
 
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -191,12 +192,12 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         else if (nowLight > stLight) {
             // 조명 밝기 낮추기
             mLampDial--;
-            // 블루투스로 mLampDial 값 전송
+            btThread.write(String.valueOf(mLampDial)+"c");
         }
         else if (nowLight < stLight) {
             // 조명 밝기 높이기
             mLampDial++;
-            // 블루투스로 mLampDial 값 전송
+            btThread.write(String.valueOf(mLampDial)+"c");
         }
 
         return screenMat;
