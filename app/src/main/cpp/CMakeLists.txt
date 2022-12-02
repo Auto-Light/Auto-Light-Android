@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set(pathPROJECT C:/Users/hayou/Project/AutoLight-Android) # 프로젝트 경로
+set(pathPROJECT D:/hayoungD/github_repository/Auto-Light-Android) # 프로젝트 경로
 set(pathOPENCV ${pathPROJECT}/sdk)
 set(pathLIBOPENCV_JAVA ${pathOPENCV}/native/libs/${ANDROID_ABI}/libopencv_java4.so)
 

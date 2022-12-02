@@ -1,0 +1,3 @@
+D:/hayoungD/github_repository/Auto-Light-Android/sdk/.cxx/Debug/3u1r5v4x/x86_64/CMakeFiles/opencv_jni_shared.dir
+D:/hayoungD/github_repository/Auto-Light-Android/sdk/.cxx/Debug/3u1r5v4x/x86_64/CMakeFiles/edit_cache.dir
+D:/hayoungD/github_repository/Auto-Light-Android/sdk/.cxx/Debug/3u1r5v4x/x86_64/CMakeFiles/rebuild_cache.dir
