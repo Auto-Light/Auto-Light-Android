@@ -77,13 +77,13 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         SeekBar seekBar = findViewById(R.id.seekBar);
         TextView seekText = findViewById(R.id.seekText);
 
-        btThread.write("65c");
+        //btThread.write("65c");
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 seekText.setText(String.valueOf(progress));
-                btThread.write(String.valueOf(seekBar.getProgress())+"c");
+                //btThread.write(String.valueOf(seekBar.getProgress())+"c");
             }
 
             @Override
