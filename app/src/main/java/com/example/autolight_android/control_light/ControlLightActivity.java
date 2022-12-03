@@ -71,7 +71,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
 
         mDBHelper = new DBHelper(this);
-        mStandardItem = new StandardItem();
         mStandardItem = mDBHelper.getStandard();
 
         mLampDial = mStandardItem.getLampDial();
@@ -171,7 +170,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat inputMat = inputFrame.rgba();
-        Mat screenMat = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
 
         int stLight = mStandardItem.getStLight();
         int nowLight = getLight(inputMat.getNativeObjAddr());
@@ -180,14 +178,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         // 적정 밝기로 조명 조절을 완료한 경우
         if (diffLight <= 5) {
             mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
-            Toast.makeText(getApplicationContext(), "조명 조절을 완료하였습니다.", Toast.LENGTH_LONG).show();
-            finish();   // 현재 액티비티 종료
-        }
-
-        // 조명 밝기를 더이상 조절할 수 없는 경우
-        if (mLampDial <= 25 || mLampDial >= 100) {
-            mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
-            Toast.makeText(getApplicationContext(), "더이상 조명을 조절할 수 없습니다.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "조명 조절을 완료하였습니다.", Toast.LENGTH_LONG).show();
             finish();   // 현재 액티비티 종료
         }
         else if (nowLight > stLight) {
@@ -201,6 +192,18 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
             btThread.write(String.valueOf(mLampDial)+"c");
         }
 
-        return screenMat;
+        // 조명 밝기를 더이상 조절할 수 없는 경우
+        if (mLampDial < 25) {
+            mDBHelper.updateLampDial(mStandardItem.getId(), 25); // 조명 다이얼 값 25 저장
+            //Toast.makeText(getApplicationContext(), "더이상 조명 밝기를 낯출 수 없습니다.", Toast.LENGTH_LONG).show();
+            finish();   // 현재 액티비티 종료
+        }
+        else if (mLampDial > 100) {
+            mDBHelper.updateLampDial(mStandardItem.getId(), 100); // 조명 다이얼 값 100 저장
+            //Toast.makeText(getApplicationContext(), "더이상 조명 밝기를 높힐 수 없습니다.", Toast.LENGTH_LONG).show();
+            finish();   // 현재 액티비티 종료
+        }
+
+        return inputFrame.rgba();
     }
 }

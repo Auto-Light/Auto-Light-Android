@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -25,6 +26,8 @@ import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
 import com.example.autolight_android.R;
+import com.example.autolight_android.database.DBHelper;
+import com.example.autolight_android.database.StandardItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,11 +36,15 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     private static final String TAG = "opencv";
     private CameraBridgeViewBase mOpenCvCameraView;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
+    private DBHelper mDBHelper;
+    private StandardItem mStandardItem;
 
     static {
         System.loadLibrary("native-lib");
         System.loadLibrary("opencv_java4");
     }
+
+    public native int getLight(long matAddrInput);
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -63,6 +70,9 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
+
+        mDBHelper = new DBHelper(this);
+        mStandardItem = mDBHelper.getStandard();
 
         SeekBar seekBar = findViewById(R.id.seekBar);
         TextView seekText = findViewById(R.id.seekText);
@@ -94,15 +104,6 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
                 finish();
             }
         });
-
-        ImageButton okButton = findViewById(R.id.ok_button);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
     }
 
     // 카메라 시작할 때 카메라 권한 받아오기
@@ -189,6 +190,22 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        Mat inputMat = inputFrame.rgba();
+
+        ImageButton okButton = findViewById(R.id.ok_button);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int stLight = getLight(inputMat.getNativeObjAddr());
+
+                mDBHelper.updateStLight(mStandardItem.getId(), stLight);
+                Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_LONG).show();
+
+                finish();
+            }
+        });
+
         return inputFrame.rgba();
     }
+
 }
