@@ -19,9 +19,9 @@ import com.example.autolight_android.permisson_support.PermissionSupport;
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'autolight_android' library on application startup.
-    static {
-        System.loadLibrary("autolight_android");
-    }
+    //static {
+        //System.loadLibrary("autolight_android");
+    //}
 
     // 클래스 선언
     private PermissionSupport permission;
