@@ -1,0 +1,3 @@
+D:/hayoungD/github_repository/Auto-Light-Android/app/.cxx/Debug/2o3i516r/arm64-v8a/CMakeFiles/native-lib.dir
+D:/hayoungD/github_repository/Auto-Light-Android/app/.cxx/Debug/2o3i516r/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/hayoungD/github_repository/Auto-Light-Android/app/.cxx/Debug/2o3i516r/arm64-v8a/CMakeFiles/rebuild_cache.dir

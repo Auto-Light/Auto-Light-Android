@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
+                startActivity(intent);
+                /*
                 if(btConnect != null && btConnect.isBluetoothConnect()){
                     if(btThread == null){
                         btThread = btConnect.btThread;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(MainActivity.this, "블루투스 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }
+                 */
             }
         });
 
@@ -60,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ControlLightActivity.class);
+                startActivity(intent);
+
+                /*
                 if(btConnect != null && btConnect.isBluetoothConnect()){
                     if(btThread == null){
                         btThread = btConnect.btThread;
@@ -70,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(MainActivity.this, "블루투스 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }
+                 */
             }
         });
 

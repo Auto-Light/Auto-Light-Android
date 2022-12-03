@@ -20,3 +20,12 @@ Java_com_example_autolight_1android_control_1light_ControlLightActivity_getLight
     meanOutput = (int)mean(matInput)[0];
     return meanOutput;
 }
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_example_autolight_1android_customize_1standard_CustomizeStandardActivity_getLight(
+        JNIEnv *env, jobject thiz, jlong mat_addr_input) {
+    int meanOutput;
+    Mat &matInput = *(Mat *)mat_addr_input;
+    meanOutput = (int)mean(matInput)[0];
+    return meanOutput;
+}

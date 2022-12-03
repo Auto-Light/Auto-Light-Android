@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "x86_64"
+			"value" : "arm64-v8a"
 		},
 		{
 			"name" : "ANDROID_NDK",
@@ -36,6 +36,18 @@
 			],
 			"type" : "UNINITIALIZED",
 			"value" : "android-21"
+		},
+		{
+			"name" : "ANDROID_STL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : "c++_shared"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -63,7 +75,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "x86_64"
+			"value" : "arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_ANDROID_NDK",
@@ -151,7 +163,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/hayoungD/github_repository/Auto-Light-Android/app/.cxx/Debug/2o3i516r/x86_64"
+			"value" : "d:/hayoungD/github_repository/Auto-Light-Android/sdk/.cxx/Debug/3u1r5v4x/arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -691,7 +703,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/hayoungD/github_repository/Auto-Light-Android/app/src/main/cpp"
+			"value" : "D:/hayoungD/github_repository/Auto-Light-Android/sdk/libcxx_helper"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -727,7 +739,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "D:\\hayoungD\\github_repository\\Auto-Light-Android\\app\\build\\intermediates\\cxx\\Debug\\2o3i516r\\obj\\x86_64"
+			"value" : "D:\\hayoungD\\github_repository\\Auto-Light-Android\\sdk\\build\\intermediates\\cxx\\Debug\\3u1r5v4x\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -999,7 +1011,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "D:\\hayoungD\\github_repository\\Auto-Light-Android\\app\\build\\intermediates\\cxx\\Debug\\2o3i516r\\obj\\x86_64"
+			"value" : "D:\\hayoungD\\github_repository\\Auto-Light-Android\\sdk\\build\\intermediates\\cxx\\Debug\\3u1r5v4x\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1271,7 +1283,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/hayoungD/github_repository/Auto-Light-Android/app/.cxx/Debug/2o3i516r/x86_64"
+			"value" : "D:/hayoungD/github_repository/Auto-Light-Android/sdk/.cxx/Debug/3u1r5v4x/arm64-v8a"
 		},
 		{
 			"name" : "Project_SOURCE_DIR",
@@ -1283,31 +1295,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/hayoungD/github_repository/Auto-Light-Android/app/src/main/cpp"
-		},
-		{
-			"name" : "log-lib",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/Users/admin/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/x86_64-linux-android/21/liblog.so"
-		},
-		{
-			"name" : "native-lib_LIB_DEPENDS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Dependencies for the target"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "general;lib_opencv;general;C:/Users/admin/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/x86_64-linux-android/21/liblog.so;"
+			"value" : "D:/hayoungD/github_repository/Auto-Light-Android/sdk/libcxx_helper"
 		}
 	],
 	"kind" : "cache",
