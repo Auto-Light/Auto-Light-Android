@@ -175,9 +175,10 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
         int stLight = mStandardItem.getStLight();
         int nowLight = getLight(inputMat.getNativeObjAddr());
+        int diffLight = Math.abs(stLight - nowLight);
 
         // 적정 밝기로 조명 조절을 완료한 경우
-        if (nowLight == stLight) {
+        if (diffLight <= 5) {
             mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
             Toast.makeText(getApplicationContext(), "조명 조절을 완료하였습니다.", Toast.LENGTH_LONG).show();
             finish();   // 현재 액티비티 종료
