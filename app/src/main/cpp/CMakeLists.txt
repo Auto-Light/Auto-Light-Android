@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set(pathPROJECT D:/hayoungD/github_repository/Auto-Light-Android) # 프로젝트 경로
+set(pathPROJECT C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android) # 프로젝트 경로
 set(pathOPENCV ${pathPROJECT}/sdk)
 set(pathLIBOPENCV_JAVA ${pathOPENCV}/native/libs/${ANDROID_ABI}/libopencv_java4.so)
 
@@ -45,6 +45,7 @@ set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${pathLIBOPENCV_JA
 find_library( # Sets the name of the path variable.
         log-lib
 
+        android lib android
         # Specifies the name of the NDK library that
         # you want CMake to locate.
         log )
@@ -56,6 +57,7 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
         native-lib
 
+        ${android-lib}
         lib_opencv
 
         # Links the target library to the log library

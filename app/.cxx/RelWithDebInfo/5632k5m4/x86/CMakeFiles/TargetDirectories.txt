@@ -1,0 +1,3 @@
+C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/.cxx/RelWithDebInfo/5632k5m4/x86/CMakeFiles/native-lib.dir
+C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/.cxx/RelWithDebInfo/5632k5m4/x86/CMakeFiles/edit_cache.dir
+C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/.cxx/RelWithDebInfo/5632k5m4/x86/CMakeFiles/rebuild_cache.dir

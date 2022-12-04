@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
@@ -17,9 +19,11 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
@@ -28,6 +32,10 @@ import com.example.autolight_android.R;
 import com.example.autolight_android.database.DBHelper;
 import com.example.autolight_android.database.StandardItem;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -94,8 +102,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         boolean _Permission = true;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+            if (checkSelfPermission(CAMERA) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{CAMERA,WRITE_EXTERNAL_STORAGE}, CAMERA_PERMISSION_REQUEST_CODE);
                 _Permission = false;
             }
         }
@@ -150,6 +158,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         for (CameraBridgeViewBase cameraBridgeViewBase: cameraViews) {
             if (cameraBridgeViewBase != null) {
                 cameraBridgeViewBase.setCameraPermissionGranted();
+
+                read_cascade_file();
             }
         }
     }
@@ -168,13 +178,69 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
     }
 
+
+    // 메소드 가져오기위해 사용
+    private void copyFile(String filename) {
+
+        String baseDir = Environment.getExternalStorageDirectory().getPath();
+        String pathDir = baseDir + File.separator + filename;
+
+        AssetManager assetManager = this.getAssets();
+        File outputFile = new File( getFilesDir() + "/" + filename );
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        try {
+            Log.d( TAG, "copyFile :: 다음 경로로 파일복사 "+ outputFile.toString());
+            inputStream = assetManager.open(filename);
+            outputStream = new FileOutputStream(outputFile);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, read);
+            }
+            inputStream.close();
+            inputStream = null;
+            outputStream.flush();
+            outputStream.close();
+            outputStream = null;
+        } catch (Exception e) {
+            Log.d(TAG, "copyFile :: 파일 복사 중 예외 발생 "+e.toString() );
+        }
+
+    }
+
+    private void read_cascade_file(){
+        copyFile("haarcascade_frontalface_alt.xml");
+        Log.d(TAG, "read_cascade_file:");
+
+        cascadeClassifier_face = loadCascade( getFilesDir().getAbsolutePath() + "/haarcascade_frontalface_alt.xml");
+        Log.d(TAG, "read_cascade_file:");
+
+    }
+
+    public native long loadCascade(String cascadeFileName);
+    public native void detect (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
+    public long cascadeClassifier_face =0;
+
+
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Mat inputMat = inputFrame.rgba();
+        Mat matInput = inputFrame.rgba();
+
+        Mat matResult = null;
+        if ( matResult == null )
+            matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+
+        //ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+       // Core.flip(matInput, matInput, 1);
+        detect(cascadeClassifier_face,matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
 
         int stLight = mStandardItem.getStLight();
-        int nowLight = getLight(inputMat.getNativeObjAddr());
+        int nowLight = getLight(matResult.getNativeObjAddr());
         int diffLight = Math.abs(stLight - nowLight);
 
         // 적정 밝기로 조명 조절을 완료한 경우
