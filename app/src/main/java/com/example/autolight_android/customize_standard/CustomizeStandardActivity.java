@@ -44,7 +44,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         System.loadLibrary("opencv_java4");
     }
 
-    public native int getLight(long matAddrInput);
+    public native int getFacelight (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -187,16 +187,26 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
 
     }
 
+    public native long loadCascade2(String cascadeFileName);
+    public native int getFacelight2(long cascadeClassfier_face, long matAddrInput, long matAddrResult);
+    public long cascadeClassifier_face =0;
+
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+
         Mat inputMat = inputFrame.rgba();
+        Mat matResult = null;
+        if ( matResult == null )
+            matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
 
         ImageButton okButton = findViewById(R.id.ok_button);
+        Mat finalMatResult = matResult;
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int stLight = getLight(inputMat.getNativeObjAddr());
+                int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), finalMatResult.getNativeObjAddr());
+
 
                 mDBHelper.updateStLight(mStandardItem.getId(), stLight);
                 Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_LONG).show();

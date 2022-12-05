@@ -52,7 +52,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         System.loadLibrary("opencv_java4");
     }
 
-    public native int getLight(long matAddrInput);
 
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -223,7 +222,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     }
 
     public native long loadCascade(String cascadeFileName);
-    public native void detect (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
+    public native int getFacelight (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
     public long cascadeClassifier_face =0;
 
 
@@ -238,10 +237,10 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
         //ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
        // Core.flip(matInput, matInput, 1);
-        detect(cascadeClassifier_face,matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+        int nowLight= getFacelight(cascadeClassifier_face,matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
 
         int stLight = mStandardItem.getStLight();
-        int nowLight = getLight(matResult.getNativeObjAddr());
+        //int nowLight = getLight(matResult.getNativeObjAddr());
         int diffLight = Math.abs(stLight - nowLight);
 
         // 적정 밝기로 조명 조절을 완료한 경우
