@@ -69,6 +69,8 @@
         opencv:layout_constraintEnd_toEndOf="parent"
         opencv:layout_constraintHorizontal_bias="0.5"
         opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view1"
+        opencv:layout_constraintTop_toBottomOf="@+id/explanation"
+        opencv:layout_constraintVertical_bias="0.7"
         opencv:srcCompat="@drawable/record_ok_button" />
 
     <TextView
@@ -89,10 +91,10 @@
         android:id="@+id/loading"
         android:layout_width="147dp"
         android:layout_height="130dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         opencv:layout_constraintBottom_toBottomOf="parent"
         opencv:layout_constraintEnd_toEndOf="parent"
-        opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view2"
+        opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view1"
         opencv:layout_constraintTop_toBottomOf="@+id/explanation"
         opencv:srcCompat="@drawable/loading" />
 

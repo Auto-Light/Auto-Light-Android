@@ -84,7 +84,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
         setContentView(R.layout.activity_control_light);
 
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view2);
+        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view1);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
