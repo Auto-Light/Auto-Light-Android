@@ -54,6 +54,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
     public native int getLight(long matAddrInput);
 
+
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {

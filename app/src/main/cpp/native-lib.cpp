@@ -35,11 +35,39 @@ Java_com_example_autolight_1android_control_1light_ControlLightActivity_getLight
 
     int meanOutput;
     Mat &matInput = *(Mat *)mat_addr_input;
+/*
+    CascadeClassifier face_classifier;
 
+    std::vector <Rect> faces;
+    Mat grayframe,Matimage;
+
+    face_classifier.load("C:/Users/SAMSUNG/Downloads/opencv/build/etc/haarcascades/haarcascade_frontalface_alt.xml");
+
+
+    while (true) {
+
+        cvtColor(matInput, grayframe, COLOR_BGR2GRAY);
+
+        face_classifier.detectMultiScale(
+                grayframe, faces, 1.1, 3, 0, Size(10, 5)
+        );
+
+        if (faces.size() > 0) {
+
+            for (int i = 0; i < faces.size(); i++) {
+
+                Point pt1(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
+                Point pt2(faces[i].x, faces[i].y);
+
+                //rectangle(matInput, faces[i], Scalar(0, 0, 255), 2, 8, 0);
+                Mat Matimage = matInput(Rect(Point(pt1),Point(pt2)));
+            }
+        }
+*/
         meanOutput = (int)mean(matInput)[0];
         return meanOutput;
 
-}
+    }
 
 extern "C"
 JNIEXPORT jint JNICALL
@@ -47,8 +75,40 @@ Java_com_example_autolight_1android_customize_1standard_CustomizeStandardActivit
         JNIEnv *env, jobject thiz, jlong mat_addr_input) {
     int meanOutput;
     Mat &matInput = *(Mat *)mat_addr_input;
-    meanOutput = (int)mean(matInput)[0];
-    return meanOutput;
+
+    //CascadeClassifier face_classifier;
+    /*
+
+    std::vector <Rect> faces;
+    Mat grayframe,Matimage;
+
+    face_classifier.load("C:/Users/SAMSUNG/Downloads/opencv/build/etc/haarcascades/haarcascade_frontalface_alt.xml");
+
+
+        cvtColor(matInput, grayframe, COLOR_BGR2GRAY);
+
+        face_classifier.detectMultiScale(
+                grayframe, faces, 1.1, 3, 0, Size(10, 5)
+        );
+
+        if (faces.size() > 0) {
+
+            for (int i = 0; i < faces.size(); i++) {
+
+                Point pt1(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
+                Point pt2(faces[i].x, faces[i].y);
+
+                //rectangle(matInput, faces[i], Scalar(0, 0, 255), 2, 8, 0);
+                Mat Matimage = matInput(Rect(Point(pt1),Point(pt2)));
+            }
+        }
+        */
+
+        meanOutput = (int)mean(matInput)[0];
+        return meanOutput;
+
+
+
 }
 
 extern "C"
@@ -123,10 +183,6 @@ Java_com_example_autolight_1android_control_1light_ControlLightActivity_detect(J
         Rect face_area(real_facesize_x, real_facesize_y, real_facesize_width,real_facesize_height);
         rectangle(img_input, Rect(real_facesize_x,real_facesize_y,real_facesize_width,real_facesize_height), Scalar(0, 0, 255), 2, 8, 0);
         Mat faceROI = img_gray( face_area );
-
-        int meanOutput;
-        meanOutput = (int)mean(faceROI)[0];
-        return meanOutput;
     }
 
     // TODO: implement detect()
