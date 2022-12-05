@@ -51,7 +51,6 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         System.loadLibrary("opencv_java4");
     }
 
-    // public native int getFacelight2 (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -245,27 +244,31 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-
-        Mat inputMat = inputFrame.rgba();
-
-        Mat matResult = null;
-        if ( matResult == null )
-            matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
-
         ImageButton okButton = findViewById(R.id.ok_button);
-
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), matResult.getNativeObjAddr());
-                mDBHelper.updateStLight(mStandardItem.getId(), stLight);
-                Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_LONG).show();
+                Mat inputMat = inputFrame.rgba();
 
-                finish();
+                Mat matResult = null;
+                if ( matResult == null )
+                    matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
+
+                int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), matResult.getNativeObjAddr());
+
+                if (stLight > -1) {
+                    mDBHelper.updateStLight(mStandardItem.getId(), stLight);
+                    Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_LONG).show();
+
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "얼굴을 추출하지 못했습니다. 다시 시도해주세요.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
-        return finalMatResult;
+        return inputFrame.rgba();
     }
 
 }

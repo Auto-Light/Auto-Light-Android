@@ -46,7 +46,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private StandardItem mStandardItem;
     private int mLampDial;
 
-    public static Boolean isStart;
+    public static Boolean mIsStart;
 
     // 타이머
     private long nStart = 0;
@@ -78,7 +78,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         nStart = System.currentTimeMillis();
 
         // start
-        isStart = false;
+        mIsStart = false;
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -111,7 +111,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isStart = true;
+                mIsStart = true;
             }
         });
     }
@@ -199,6 +199,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
     }
 
+
     // 메소드 가져오기위해 사용
     private void copyFile(String filename) {
 
@@ -245,30 +246,29 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     public native int getFacelight (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
     public long cascadeClassifier_face =0;
 
+
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        if (isStart) {
-            nEnd = System.currentTimeMillis();
+        Mat matInput = inputFrame.rgba();
 
-            Mat matInput = inputFrame.rgba();
+        Mat matResult = null;
+        if (matResult == null)
+            matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
 
-            Mat matResult = null;
-            if (matResult == null)
-                matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+        int stLight = mStandardItem.getStLight();
 
-            //ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
-            // Core.flip(matInput, matInput, 1);
-            int nowLight = getFacelight(cascadeClassifier_face, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+        int nowLight = getFacelight(cascadeClassifier_face, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
 
-            int stLight = mStandardItem.getStLight();
-
+        if (mIsStart) {
+            // 얼굴 추출이 된 경우
             if (nowLight > -1) {
-                //int nowLight = getLight(matResult.getNativeObjAddr());
+
                 int diffLight = Math.abs(stLight - nowLight);
 
                 // 적정 밝기로 조명 조절을 완료한 경우
                 if (diffLight <= 5) {
+                    nEnd = System.currentTimeMillis();
                     mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
 
                     // 팝업 띄우기
@@ -288,6 +288,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
                 // 조명 밝기를 더이상 조절할 수 없는 경우
                 if (mLampDial < 25) {
+                    nEnd = System.currentTimeMillis();
                     mDBHelper.updateLampDial(mStandardItem.getId(), 25); // 조명 다이얼 값 25 저장
 
                     // 팝업 띄우기
@@ -296,6 +297,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                     intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
                     startActivityForResult(intent, 1);
                 } else if (mLampDial > 100) {
+                    nEnd = System.currentTimeMillis();
                     mDBHelper.updateLampDial(mStandardItem.getId(), 100); // 조명 다이얼 값 100 저장
 
                     // 팝업 띄우기
@@ -304,11 +306,10 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                     intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
                     startActivityForResult(intent, 1);
                 }
-
-                return matResult;
             }
         }
-        return inputFrame.rgba();
+
+        return matResult;
     }
 
     @Override
