@@ -13,6 +13,7 @@
         android:id="@+id/imageView"
         android:layout_width="356dp"
         android:layout_height="327dp"
+        android:layout_marginStart="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +59,7 @@
         android:id="@+id/button1"
         android:layout_width="360dp"
         android:layout_height="97dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/main_button_normal"
         app:layout_constraintEnd_toEndOf="@+id/rectangle"
         app:layout_constraintStart_toStartOf="@+id/rectangle"
@@ -68,7 +69,7 @@
         android:id="@+id/button2"
         android:layout_width="360dp"
         android:layout_height="97dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/main_button_normal"
         app:layout_constraintEnd_toEndOf="@+id/rectangle"
         app:layout_constraintStart_toStartOf="@+id/rectangle"
@@ -169,11 +170,10 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="129dp"
-        android:layout_height="129dp"
-        android:layout_marginStart="-6dp"
+        android:layout_width="121dp"
+        android:layout_height="121dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:srcCompat="@drawable/main_light_land" />
 
