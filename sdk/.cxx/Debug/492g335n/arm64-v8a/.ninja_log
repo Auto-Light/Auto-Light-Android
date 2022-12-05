@@ -3,3 +3,4 @@
 107	361	690104905	libopencv_jni_shared.a	f4d8fee05900084e
 0	34	690288215	CMakeFiles/opencv_jni_shared.dir/dummy.cpp.o	de621a65df44bf55
 34	176	690288215	libopencv_jni_shared.a	f4d8fee05900084e
+5	362	691931460	build.ninja	43c2aaa4d5c97190

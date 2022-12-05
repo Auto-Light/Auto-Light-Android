@@ -83,12 +83,13 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
             mMatrix.preScale(-1, 1, hw, hh); //MH - this will mirror the camera
         }
         mMatrix.preTranslate(hw, hh);
+
         if (isFrontCamera){
-            mMatrix.preRotate(270); // 실제 디바이스
-            //mMatrix.preRotate(0);   // 에뮬레이터
+            mMatrix.preRotate(0); // 실제 디바이스
         } else {
             mMatrix.preRotate(90);
         }
+
         mMatrix.preTranslate(-hw, -hh);
         mMatrix.preScale(scale,scale,hw,hh);
     };

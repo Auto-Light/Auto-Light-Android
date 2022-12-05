@@ -12,7 +12,7 @@
         android:id="@+id/activity_surface_view2"
         android:layout_width="411dp"
         android:layout_height="335dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         opencv:camera_id="any"
         opencv:layout_constraintBottom_toBottomOf="parent"
         opencv:layout_constraintEnd_toEndOf="parent"
@@ -82,5 +82,13 @@
         opencv:layout_constraintHorizontal_bias="0.741"
         opencv:layout_constraintStart_toStartOf="@+id/start_button"
         opencv:layout_constraintTop_toTopOf="@+id/start_button" />
+
+    <ImageView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        opencv:srcCompat="@drawable/loading"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="534dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F1F1"
+    android:orientation="vertical"
+    tools:context=".customize_standard.CustomizeStandardActivity">
+
+    <org.opencv.android.JavaCameraView
+        android:id="@+id/activity_surface_view1"
+        android:layout_width="411dp"
+        android:layout_height="335dp"
+        android:layout_marginStart="16dp"
+        android:visibility="visible"
+        opencv:camera_id="any"
+        opencv:layout_constraintBottom_toBottomOf="parent"
+        opencv:layout_constraintStart_toEndOf="@+id/back_button"
+        opencv:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/home_button"
+        opencv:layout_constraintBottom_toBottomOf="parent"
+        opencv:layout_constraintStart_toStartOf="parent"
+        opencv:layout_constraintTop_toTopOf="parent"
+        opencv:layout_constraintVertical_bias="0.501" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="기준값 설정"
+        android:textColor="#3E3E3E"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        opencv:layout_constraintBottom_toBottomOf="parent"
+        opencv:layout_constraintEnd_toEndOf="parent"
+        opencv:layout_constraintHorizontal_bias="0.5"
+        opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view1"
+        opencv:layout_constraintTop_toTopOf="parent"
+        opencv:layout_constraintVertical_bias="0.063" />
+
+    <TextView
+        android:id="@+id/explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="얼굴을 잘 인식할 수 있도록\n얼굴을 가리는 물건\n(마스크, 선글라스 등)은\n 최대한 피해주세요."
+        android:textColor="#575757"
+        android:textSize="16sp"
+        opencv:layout_constraintEnd_toEndOf="parent"
+        opencv:layout_constraintHorizontal_bias="0.5"
+        opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view1"
+        opencv:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="248dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="24dp"
+        android:max="100"
+        android:min="25"
+        android:progress="65"
+        opencv:layout_constraintEnd_toEndOf="parent"
+        opencv:layout_constraintHorizontal_bias="0.5"
+        opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view1"
+        opencv:layout_constraintTop_toBottomOf="@+id/explanation" />
+
+    <ImageButton
+        android:id="@+id/ok_button"
+        android:layout_width="84dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
+        opencv:layout_constraintBottom_toBottomOf="parent"
+        opencv:layout_constraintEnd_toEndOf="parent"
+        opencv:layout_constraintHorizontal_bias="0.5"
+        opencv:layout_constraintStart_toEndOf="@+id/activity_surface_view1"
+        opencv:srcCompat="@drawable/record_ok_button" />
+
+    <TextView
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textColor="#3E3E3E"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        opencv:layout_constraintBottom_toBottomOf="@+id/ok_button"
+        opencv:layout_constraintEnd_toEndOf="@+id/ok_button"
+        opencv:layout_constraintHorizontal_bias="0.741"
+        opencv:layout_constraintStart_toStartOf="@+id/ok_button"
+        opencv:layout_constraintTop_toTopOf="@+id/ok_button" />
+
+    <TextView
+        android:id="@+id/seekText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+        android:text="65"
+        android:textColor="#575757"
+        opencv:layout_constraintBottom_toTopOf="@+id/ok_button"
+        opencv:layout_constraintEnd_toEndOf="@+id/seekBar"
+        opencv:layout_constraintStart_toStartOf="@+id/seekBar"
+        opencv:layout_constraintTop_toBottomOf="@+id/seekBar"
+        opencv:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

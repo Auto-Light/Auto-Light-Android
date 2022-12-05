@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/.cxx/RelWithDebInfo/5632k5m4/x86",
+  "command": "C:\\Users\\SAMSUNG\\AppData\\Local\\Android\\Sdk\\ndk\\23.1.7779620\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=i686-none-linux-android21 --gcc-toolchain=C:/Users/SAMSUNG/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/SAMSUNG/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dnative_lib_EXPORTS -IC:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/sdk/native/jni/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu++11 -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\native-lib.dir\\native-lib.cpp.o -c C:\\Users\\SAMSUNG\\StudioProjects\\Auto-Light-Android\\app\\src\\main\\cpp\\native-lib.cpp",
+  "file": "C:\\Users\\SAMSUNG\\StudioProjects\\Auto-Light-Android\\app\\src\\main\\cpp\\native-lib.cpp"
+}
+]
