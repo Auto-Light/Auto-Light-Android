@@ -74,9 +74,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 타이머 시작
-        nStart = System.currentTimeMillis();
-
         // start
         mIsStart = false;
 
@@ -111,6 +108,10 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 타이머 시작
+                nStart = System.currentTimeMillis();
+
+                // 밝기 조절 시작
                 mIsStart = true;
             }
         });
