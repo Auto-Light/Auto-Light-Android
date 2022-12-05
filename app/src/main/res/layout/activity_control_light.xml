@@ -83,4 +83,12 @@
         opencv:layout_constraintStart_toStartOf="@+id/start_button"
         opencv:layout_constraintTop_toTopOf="@+id/start_button" />
 
+    <ImageView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        opencv:srcCompat="@drawable/loading"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="534dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

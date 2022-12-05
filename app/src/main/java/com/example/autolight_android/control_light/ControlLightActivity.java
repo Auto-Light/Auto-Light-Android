@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -30,6 +31,7 @@ import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 import com.example.autolight_android.R;
 import com.example.autolight_android.database.DBHelper;
 import com.example.autolight_android.database.StandardItem;
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -97,6 +99,11 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         ImageButton backButton = findViewById(R.id.back_button);
 
         ImageButton startButton = findViewById(R.id.start_button);
+        startButton.setClickable(true);
+
+        ImageView loadingSpinner = (ImageView)findViewById(R.id.loading);
+        Glide.with(this).load(R.drawable.loading).into(loadingSpinner);
+        loadingSpinner.setVisibility(loadingSpinner.INVISIBLE);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +115,13 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 타이머 시작
-                nStart = System.currentTimeMillis();
+                nStart = System.currentTimeMillis();    // 타이머 시작
+                mIsStart = true;                        // 밝기 조절 시작
+                startButton.setClickable(false);        // 시작 버튼 클릭 비활성화
 
-                // 밝기 조절 시작
-                mIsStart = true;
+                // 로딩 스피너 띄우기
+                loadingSpinner.setVisibility(loadingSpinner.VISIBLE);
+
             }
         });
     }
