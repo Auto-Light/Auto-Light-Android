@@ -243,7 +243,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         int stLight = mStandardItem.getStLight();
 
         if (nowLight > -1) {
-            //int nowLight = getLight(matResult.getNativeObjAddr());
+
             int diffLight = Math.abs(stLight - nowLight);
 
             // 적정 밝기로 조명 조절을 완료한 경우

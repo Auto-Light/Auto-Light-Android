@@ -51,7 +51,6 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         System.loadLibrary("opencv_java4");
     }
 
-    public native int getFacelight (long cascadeClassfier_face, long matAddrInput, long matAddrResult);
 
     private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -248,15 +247,14 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
 
         Mat inputMat = inputFrame.rgba();
         Mat matResult = null;
-        if ( matResult == null )
+      //if ( matResult == null )
             matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
 
         ImageButton okButton = findViewById(R.id.ok_button);
         Mat finalMatResult = matResult;
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), finalMatResult.getNativeObjAddr());
+            public void onClick(View view) {int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), finalMatResult.getNativeObjAddr());
 
 
                 mDBHelper.updateStLight(mStandardItem.getId(), stLight);
@@ -268,5 +266,4 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
 
         return inputFrame.rgba();
     }
-
 }
