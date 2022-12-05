@@ -49,7 +49,7 @@
         android:id="@+id/explanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="84dp"
         android:gravity="center"
         android:textColor="#575757"
         android:text="얼굴을 잘 인식할 수 있도록\n얼굴을 가리는 물건(마스크, 선글라스 등)\n은 최대한 피해주세요."
@@ -57,5 +57,30 @@
         opencv:layout_constraintEnd_toEndOf="parent"
         opencv:layout_constraintStart_toStartOf="parent"
         opencv:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/start_button"
+        android:layout_width="84dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        opencv:layout_constraintEnd_toEndOf="parent"
+        opencv:layout_constraintHorizontal_bias="0.5"
+        opencv:layout_constraintStart_toStartOf="parent"
+        opencv:layout_constraintTop_toBottomOf="@+id/activity_surface_view2"
+        opencv:srcCompat="@drawable/record_ok_button" />
+
+    <TextView
+        android:id="@+id/start_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작"
+        android:textColor="#3E3E3E"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        opencv:layout_constraintBottom_toBottomOf="@+id/start_button"
+        opencv:layout_constraintEnd_toEndOf="@+id/start_button"
+        opencv:layout_constraintHorizontal_bias="0.741"
+        opencv:layout_constraintStart_toStartOf="@+id/start_button"
+        opencv:layout_constraintTop_toTopOf="@+id/start_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

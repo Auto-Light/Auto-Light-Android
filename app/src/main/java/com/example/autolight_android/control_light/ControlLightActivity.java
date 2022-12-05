@@ -39,6 +39,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private StandardItem mStandardItem;
     private int mLampDial;
 
+    public static Boolean isStart;
+
     // 타이머
     private long nStart = 0;
     private long nEnd = 0;
@@ -68,6 +70,9 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         // 타이머 시작
         nStart = System.currentTimeMillis();
 
+        // start
+        isStart = false;
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -86,10 +91,20 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         Toast.makeText(getApplicationContext(), mStandardItem.getLampDial() + " " + mStandardItem.getStLight(), Toast.LENGTH_LONG).show();
 
         ImageButton backButton = findViewById(R.id.back_button);
+
+        ImageButton startButton = findViewById(R.id.start_button);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isStart = true;
             }
         });
     }
@@ -178,55 +193,53 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Mat inputMat = inputFrame.rgba();
+        if (isStart) {
+            Mat inputMat = inputFrame.rgba();
 
-        int stLight = mStandardItem.getStLight();
-        int nowLight = getLight(inputMat.getNativeObjAddr());
-        int diffLight = Math.abs(stLight - nowLight);
-        // 타이머
-        nEnd = System.currentTimeMillis();
+            int stLight = mStandardItem.getStLight();
+            int nowLight = getLight(inputMat.getNativeObjAddr());
+            int diffLight = Math.abs(stLight - nowLight);
+            // 타이머
+            nEnd = System.currentTimeMillis();
 
-        // 적정 밝기로 조명 조절을 완료한 경우
-        if (diffLight <= 5) {
-            mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
+            // 적정 밝기로 조명 조절을 완료한 경우
+            if (diffLight <= 5) {
+                mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
 
-            // 팝업 띄우기
-            Intent intent = new Intent(this, PopUpDialogActivity.class);
-            intent.putExtra("data", "조명 조절을 완료하였습니다." + nowLight);
-            intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
-            startActivityForResult(intent, 1);
+                // 팝업 띄우기
+                Intent intent = new Intent(this, PopUpDialogActivity.class);
+                intent.putExtra("data", "조명 조절을 완료하였습니다." + nowLight);
+                intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
+                startActivityForResult(intent, 1);
+            } else if (nowLight > stLight) {
+                // 조명 밝기 낮추기
+                mLampDial--;
+                //btThread.write(String.valueOf(mLampDial)+"c");
+            } else if (nowLight < stLight) {
+                // 조명 밝기 높이기
+                mLampDial++;
+                //btThread.write(String.valueOf(mLampDial)+"c");
+            }
+
+            // 조명 밝기를 더이상 조절할 수 없는 경우
+            if (mLampDial < 25) {
+                mDBHelper.updateLampDial(mStandardItem.getId(), 25); // 조명 다이얼 값 25 저장
+
+                // 팝업 띄우기
+                Intent intent = new Intent(this, PopUpDialogActivity.class);
+                intent.putExtra("data", "더이상 조명 밝기를 낯출 수 없습니다." + nowLight);
+                intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
+                startActivityForResult(intent, 1);
+            } else if (mLampDial > 100) {
+                mDBHelper.updateLampDial(mStandardItem.getId(), 100); // 조명 다이얼 값 100 저장
+
+                // 팝업 띄우기
+                Intent intent = new Intent(this, PopUpDialogActivity.class);
+                intent.putExtra("data", "더이상 조명 밝기를 높일 수 없습니다." + nowLight);
+                intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
+                startActivityForResult(intent, 1);
+            }
         }
-        else if (nowLight > stLight) {
-            // 조명 밝기 낮추기
-            mLampDial--;
-            //btThread.write(String.valueOf(mLampDial)+"c");
-        }
-        else if (nowLight < stLight) {
-            // 조명 밝기 높이기
-            mLampDial++;
-            //btThread.write(String.valueOf(mLampDial)+"c");
-        }
-
-        // 조명 밝기를 더이상 조절할 수 없는 경우
-        if (mLampDial < 25) {
-            mDBHelper.updateLampDial(mStandardItem.getId(), 25); // 조명 다이얼 값 25 저장
-
-            // 팝업 띄우기
-            Intent intent = new Intent(this, PopUpDialogActivity.class);
-            intent.putExtra("data", "더이상 조명 밝기를 낯출 수 없습니다." + nowLight);
-            intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
-            startActivityForResult(intent, 1);
-        }
-        else if (mLampDial > 100) {
-            mDBHelper.updateLampDial(mStandardItem.getId(), 100); // 조명 다이얼 값 100 저장
-
-            // 팝업 띄우기
-            Intent intent = new Intent(this, PopUpDialogActivity.class);
-            intent.putExtra("data", "더이상 조명 밝기를 높일 수 없습니다." + nowLight);
-            intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
-            startActivityForResult(intent, 1);
-        }
-
         return inputFrame.rgba();
     }
 
