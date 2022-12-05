@@ -257,7 +257,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
             matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
 
         int stLight = mStandardItem.getStLight();
-
         int nowLight = getFacelight(cascadeClassifier_face, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
 
         if (mIsStart) {
