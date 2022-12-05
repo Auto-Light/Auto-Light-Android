@@ -1,0 +1,25 @@
+# ninja log v5
+1	4074	691797274	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+4076	4234	691797274	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+5	2059	691823694	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+2059	2328	691823694	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+5	3387	691824215	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+3387	3491	691824215	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+22	6862	691836670	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+6862	7017	691836671	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+9	4313	691841009	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+4313	4616	691841009	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+6	2847	691841743	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+2847	2978	691841743	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+8	2456	691841775	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+2456	2587	691841775	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+4	2443	691841804	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+2444	2557	691841804	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+13	5816	691842057	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+5816	5978	691842057	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+7	2931	691853337	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+2931	3080	691853337	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+12	22246	691872801	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+22247	24036	691872803	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d
+6	2747	691912075	CMakeFiles/native-lib.dir/native-lib.cpp.o	215cc314edd04046
+2747	3154	691912076	C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/app/build/intermediates/cxx/Debug/1p6p343g/obj/arm64-v8a/libnative-lib.so	ef8f88278675d77d

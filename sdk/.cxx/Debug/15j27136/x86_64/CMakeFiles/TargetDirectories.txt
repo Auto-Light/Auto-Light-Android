@@ -1,0 +1,3 @@
+C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/sdk/.cxx/Debug/15j27136/x86_64/CMakeFiles/opencv_jni_shared.dir
+C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/sdk/.cxx/Debug/15j27136/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/SAMSUNG/StudioProjects/Auto-Light-Android/sdk/.cxx/Debug/15j27136/x86_64/CMakeFiles/rebuild_cache.dir
