@@ -258,12 +258,12 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
 
                 if (stLight > -1) {
                     mDBHelper.updateStLight(mStandardItem.getId(), stLight);
-                    Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_SHORT).show();
 
                     finish();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "얼굴을 추출하지 못했습니다. 다시 시도해주세요.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "얼굴을 추출하지 못했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

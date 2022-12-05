@@ -94,7 +94,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
         mLampDial = mStandardItem.getLampDial();
         //btThread.write(String.valueOf(mLampDial)+"c");
-        Toast.makeText(getApplicationContext(), mStandardItem.getLampDial() + " " + mStandardItem.getStLight(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), mStandardItem.getLampDial() + " " + mStandardItem.getStLight(), Toast.LENGTH_SHORT).show();
 
         ImageButton backButton = findViewById(R.id.back_button);
 
