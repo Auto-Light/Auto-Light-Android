@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/mandori97/AndroidStudioProjects/AutoLight_Android/app/.cxx/Debug/2i56543f/x86_64",
+  "command": "C:\\Users\\mandori97\\AppData\\Local\\Android\\Sdk\\ndk\\23.1.7779620\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android21 --gcc-toolchain=C:/Users/mandori97/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/mandori97/AppData/Local/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dnative_lib_EXPORTS -IC:/Users/mandori97/AndroidStudioProjects/AutoLight_Android/sdk/native/jni/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu++11 -fno-limit-debug-info  -fPIC -o CMakeFiles\\native-lib.dir\\native-lib.cpp.o -c C:\\Users\\mandori97\\AndroidStudioProjects\\AutoLight_Android\\app\\src\\main\\cpp\\native-lib.cpp",
+  "file": "C:\\Users\\mandori97\\AndroidStudioProjects\\AutoLight_Android\\app\\src\\main\\cpp\\native-lib.cpp"
+}
+]
