@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "native-lib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-native-lib-Debug-a85d341ce9c7663118d9.json",
+					"jsonFile" : "target-native-lib-Debug-6233bf90ebd8e5955e0d.json",
 					"name" : "native-lib",
 					"projectIndex" : 0
 				}
@@ -48,7 +48,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/arm64-v8a",
+		"build" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/.cxx/Debug/u711x444/x86_64",
 		"source" : "C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/src/main/cpp"
 	},
 	"version" : 

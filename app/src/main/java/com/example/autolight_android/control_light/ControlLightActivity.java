@@ -39,6 +39,10 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private StandardItem mStandardItem;
     private int mLampDial;
 
+    // 타이머
+    private long nStart = 0;
+    private long nEnd = 0;
+
     static {
         System.loadLibrary("native-lib");
         System.loadLibrary("opencv_java4");
@@ -60,6 +64,9 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 타이머 시작
+        nStart = System.currentTimeMillis();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -176,6 +183,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         int stLight = mStandardItem.getStLight();
         int nowLight = getLight(inputMat.getNativeObjAddr());
         int diffLight = Math.abs(stLight - nowLight);
+        // 타이머
+        nEnd = System.currentTimeMillis();
 
         // 적정 밝기로 조명 조절을 완료한 경우
         if (diffLight <= 5) {
@@ -184,6 +193,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
             // 팝업 띄우기
             Intent intent = new Intent(this, PopUpDialogActivity.class);
             intent.putExtra("data", "조명 조절을 완료하였습니다." + nowLight);
+            intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
             startActivityForResult(intent, 1);
         }
         else if (nowLight > stLight) {
@@ -204,6 +214,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
             // 팝업 띄우기
             Intent intent = new Intent(this, PopUpDialogActivity.class);
             intent.putExtra("data", "더이상 조명 밝기를 낯출 수 없습니다." + nowLight);
+            intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
             startActivityForResult(intent, 1);
         }
         else if (mLampDial > 100) {
@@ -212,6 +223,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
             // 팝업 띄우기
             Intent intent = new Intent(this, PopUpDialogActivity.class);
             intent.putExtra("data", "더이상 조명 밝기를 높일 수 없습니다." + nowLight);
+            intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
             startActivityForResult(intent, 1);
         }
 

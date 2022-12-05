@@ -1,3 +1,5 @@
 # ninja log v5
 1	1192	691314469	CMakeFiles/native-lib.dir/native-lib.cpp.o	86d7a6e79970c855
 1193	1430	691314469	C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/build/intermediates/cxx/Debug/u711x444/obj/arm64-v8a/libnative-lib.so	b7d853f9ca5cd9e8
+6	4036	691909104	CMakeFiles/native-lib.dir/native-lib.cpp.o	86d7a6e79970c855
+4038	4420	691909105	C:/Users/inbbo/AndroidStudioProjects/AutoLight2/app/build/intermediates/cxx/Debug/u711x444/obj/arm64-v8a/libnative-lib.so	b7d853f9ca5cd9e8

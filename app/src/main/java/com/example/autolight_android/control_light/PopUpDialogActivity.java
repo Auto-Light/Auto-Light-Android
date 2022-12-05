@@ -30,7 +30,8 @@ public class PopUpDialogActivity extends Activity {
         //데이터 가져오기
         Intent intent = getIntent();
         String data = intent.getStringExtra("data");
-        txtText.setText(data);
+        String time = intent.getStringExtra("time");
+        txtText.setText(data + "\n" + time);
     }
 
     //확인 버튼 클릭
