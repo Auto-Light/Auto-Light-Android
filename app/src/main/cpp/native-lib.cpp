@@ -91,6 +91,11 @@ Java_com_example_autolight_1android_control_1light_ControlLightActivity_getFacel
             double real_facesize_y = faces[i].y / resizeRatio;
             double real_facesize_width = faces[i].width / resizeRatio;
             double real_facesize_height = faces[i].height / resizeRatio;
+            double real_facesize_area = real_facesize_width * real_facesize_height;
+
+            // 얼굴 면적으로 필터링
+            // 추출되는 얼굴 면적이 너무 작으면 주촬영자의 얼굴로 판단X -> 밝기 추출하지 않고 종료
+            if (real_facesize_area < 10000) { return -1; }
 
             Point center(real_facesize_x + real_facesize_width / 2,
                          real_facesize_y + real_facesize_height / 2);
@@ -107,7 +112,8 @@ Java_com_example_autolight_1android_control_1light_ControlLightActivity_getFacel
 
             int meanOutput;
             meanOutput = (int) mean(faceROI)[0];
-            return meanOutput;
+            return meanOutput;  // 추출한 밝기값 리턴
+            //return real_facesize_area; // 얼굴 면적 리턴
         }
     }
     else //추출안되었을때

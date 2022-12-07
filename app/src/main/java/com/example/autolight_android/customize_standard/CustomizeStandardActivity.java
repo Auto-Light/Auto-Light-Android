@@ -244,18 +244,18 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     // 카메라에서 받는 프레임 가지고 작업하는 함수
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        Mat inputMat = inputFrame.rgba();
+
+        Mat matResult = null;
+        if ( matResult == null )
+            matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
+
+        int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), matResult.getNativeObjAddr());
+
         ImageButton okButton = findViewById(R.id.ok_button);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Mat inputMat = inputFrame.rgba();
-
-                Mat matResult = null;
-                if ( matResult == null )
-                    matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
-
-                int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), matResult.getNativeObjAddr());
-
                 if (stLight > -1) {
                     mDBHelper.updateStLight(mStandardItem.getId(), stLight);
                     Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_SHORT).show();
@@ -268,7 +268,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
             }
         });
 
-        return inputFrame.rgba();
+        return matResult;
     }
 
 }
