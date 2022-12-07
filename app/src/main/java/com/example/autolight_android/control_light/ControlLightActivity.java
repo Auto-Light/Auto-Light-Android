@@ -94,6 +94,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
         mLampDial = mStandardItem.getLampDial();
         //btThread.write(String.valueOf(mLampDial)+"c");
+        btThread.write(65 + "c");
         Toast.makeText(getApplicationContext(), mStandardItem.getLampDial() + " " + mStandardItem.getStLight(), Toast.LENGTH_SHORT).show();
 
         ImageButton backButton = findViewById(R.id.back_button);
@@ -288,11 +289,11 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                 } else if (nowLight > stLight) {
                     // 조명 밝기 낮추기
                     mLampDial--;
-                    //btThread.write(String.valueOf(mLampDial)+"c");
+                    btThread.write(String.valueOf(mLampDial)+"c");
                 } else if (nowLight < stLight) {
                     // 조명 밝기 높이기
                     mLampDial++;
-                    //btThread.write(String.valueOf(mLampDial)+"c");
+                    btThread.write(String.valueOf(mLampDial)+"c");
                 }
 
                 // 조명 밝기를 더이상 조절할 수 없는 경우
