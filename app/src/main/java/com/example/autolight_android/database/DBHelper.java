@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper{
-    private static final int DB_VERSION = 3; // 버전 3으로 업데이트
+    private static final int DB_VERSION = 4; // 버전 3으로 업데이트
     private static final String DB_NAME = "standard.db";
 
     public DBHelper(@Nullable Context context) {
@@ -18,8 +18,8 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Standard (id INTEGER PRIMARY KEY AUTOINCREMENT, stLight INTEGER NOT NULL, lampDial INTEGER NOT NULL)");
-        db.execSQL("INSERT INTO Standard (stLight, lampDial) VALUES(128, 65);"); // 초기화
+        db.execSQL("CREATE TABLE IF NOT EXISTS Standard (id INTEGER PRIMARY KEY AUTOINCREMENT, stLight INTEGER NOT NULL)");
+        db.execSQL("INSERT INTO Standard (stLight) VALUES(128);"); // 초기화
     }
 
     @Override
@@ -38,11 +38,9 @@ public class DBHelper extends SQLiteOpenHelper{
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
                 @SuppressLint("Range") int stLight = cursor.getInt(cursor.getColumnIndex("stLight"));
-                @SuppressLint("Range") int lampDial = cursor.getInt(cursor.getColumnIndex("lampDial"));
 
                 standardItem.setId(id);
                 standardItem.setStLight(stLight);
-                standardItem.setLampDial(lampDial);
             }
         }
         cursor.close();
@@ -56,12 +54,5 @@ public class DBHelper extends SQLiteOpenHelper{
 
         db.execSQL("UPDATE Standard SET (stLight) = ('"+ _stLight +"') WHERE (id) = ('"+ _id +"');");
         db.close();
-    }
-
-    // UPDATE문 - 최근 조명 다이얼값 수정
-    public void updateLampDial(int _id, int _lampDial) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.execSQL("UPDATE Standard SET (lampDial) = ('"+ _lampDial +"') WHERE (id) = ('"+ _id +"');");
     }
 }

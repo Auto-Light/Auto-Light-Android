@@ -92,10 +92,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         mDBHelper = new DBHelper(this);
         mStandardItem = mDBHelper.getStandard();
 
-        mLampDial = mStandardItem.getLampDial();
-        //btThread.write(String.valueOf(mLampDial)+"c");
         btThread.write(65 + "c");
-        Toast.makeText(getApplicationContext(), mStandardItem.getLampDial() + " " + mStandardItem.getStLight(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), String.valueOf(mStandardItem.getStLight()), Toast.LENGTH_SHORT).show();
 
         ImageButton backButton = findViewById(R.id.back_button);
 
@@ -279,7 +277,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                 // 적정 밝기로 조명 조절을 완료한 경우
                 if (diffLight <= 5) {
                     nEnd = System.currentTimeMillis();
-                    mDBHelper.updateLampDial(mStandardItem.getId(), mLampDial); // 현재 조명 다이얼 값 저장
 
                     // 팝업 띄우기
                     Intent intent = new Intent(this, PopUpDialogActivity.class);
@@ -299,7 +296,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                 // 조명 밝기를 더이상 조절할 수 없는 경우
                 if (mLampDial < 25) {
                     nEnd = System.currentTimeMillis();
-                    mDBHelper.updateLampDial(mStandardItem.getId(), 25); // 조명 다이얼 값 25 저장
 
                     // 팝업 띄우기
                     Intent intent = new Intent(this, PopUpDialogActivity.class);
@@ -308,7 +304,6 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                     startActivityForResult(intent, 1);
                 } else if (mLampDial > 100) {
                     nEnd = System.currentTimeMillis();
-                    mDBHelper.updateLampDial(mStandardItem.getId(), 100); // 조명 다이얼 값 100 저장
 
                     // 팝업 띄우기
                     Intent intent = new Intent(this, PopUpDialogActivity.class);
