@@ -49,6 +49,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private StandardItem mStandardItem;
     private int mUserID;
     private int mLampDial;
+    private int mFrameCount = 0;
+    private int mNowLightSum = 0;
 
     public static Boolean mIsStart;
 
@@ -285,14 +287,22 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         int stLight = mStandardItem.getStLight();
         int nowLight = getFacelight(cascadeClassifier_face, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
 
+        mFrameCount++;
+        if (nowLight > -1) {
+            mNowLightSum += nowLight;
+        }
+
         if (mIsStart) {
             // 얼굴 추출이 된 경우
-            if (nowLight > -1) {
+            if (mFrameCount == 30) {
+                mFrameCount = 0;
 
-                int diffLight = Math.abs(stLight - nowLight);
+                int nowLightMean = mNowLightSum / 30;
+
+                int diffLight = Math.abs(stLight - nowLightMean);
 
                 // 적정 밝기로 조명 조절을 완료한 경우
-                if (diffLight < 2) {
+                if (diffLight < 5) {
                     nEnd = System.currentTimeMillis();
 
                     // 팝업 띄우기
@@ -312,6 +322,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
                 // 조명 밝기를 더이상 조절할 수 없는 경우
                 if (mLampDial < 25) {
+                    mLampDial = 25;
+                    /*
                     nEnd = System.currentTimeMillis();
 
                     // 팝업 띄우기
@@ -319,7 +331,11 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                     intent.putExtra("data", "더이상 조명 밝기를 낯출 수 없습니다." + nowLight);
                     intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
                     startActivityForResult(intent, 1);
+
+                     */
                 } else if (mLampDial > 100) {
+                    mLampDial = 100;
+                    /*
                     nEnd = System.currentTimeMillis();
 
                     // 팝업 띄우기
@@ -327,6 +343,9 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                     intent.putExtra("data", "더이상 조명 밝기를 높일 수 없습니다." + nowLight);
                     intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
                     startActivityForResult(intent, 1);
+
+                }
+                     */
                 }
             }
         }

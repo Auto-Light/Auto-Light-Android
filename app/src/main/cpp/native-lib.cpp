@@ -104,11 +104,10 @@ Java_com_example_autolight_1android_control_1light_ControlLightActivity_getFacel
                     Scalar(255, 0, 255), 3, 8, 0);
 
 
-            Rect face_area(real_facesize_x, real_facesize_y, real_facesize_width,
-                           real_facesize_height);
+            Mat faceROI(img_gray, Rect(real_facesize_x, real_facesize_y, real_facesize_width,
+                                       real_facesize_height));
             //rectangle(img_input, Rect(real_facesize_x, real_facesize_y, real_facesize_width,
                                      // real_facesize_height), Scalar(0, 0, 255), 2, 8, 0);
-            Mat faceROI = img_gray(face_area);
 
             int meanOutput;
             meanOutput = (int) mean(faceROI)[0];
