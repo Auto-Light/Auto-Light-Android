@@ -292,7 +292,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                 int diffLight = Math.abs(stLight - nowLight);
 
                 // 적정 밝기로 조명 조절을 완료한 경우
-                if (diffLight <= 5) {
+                if (diffLight < 2) {
                     nEnd = System.currentTimeMillis();
 
                     // 팝업 띄우기

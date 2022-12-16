@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     public static ConnectedThread btThread;
     private int mUserID = -1;
+    private boolean mIsUserIDInDB = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +42,32 @@ public class MainActivity extends AppCompatActivity {
         permissionCheck();
 
         // 사용자 ID 입력받기
-        boolean isUserIDInDB = false;
-        EditText editTextUserID = (EditText)findViewById(R.id.editTextUserID);
+        Button insertButton = findViewById(R.id.insertButton);
+        insertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editTextUserID = (EditText)findViewById(R.id.editTextUserID);
 
-        try {
-            mUserID = Integer.parseInt(editTextUserID.getText().toString());
-            if (mUserID > 0 && mUserID < 11) {
-                isUserIDInDB = true;
+                try {
+                    mUserID = Integer.parseInt(editTextUserID.getText().toString());
+
+                    if (mUserID > 0 && mUserID < 11) {
+                        mIsUserIDInDB = true;
+                    }
+                }
+                catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
+                    mIsUserIDInDB = false;
+                }
+                catch (Exception e) {
+                    mIsUserIDInDB = false;
+                }
             }
-        }
-        catch (NumberFormatException e) {
-            Toast.makeText(MainActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
-            isUserIDInDB = false;
-        }
-        catch (Exception e) {
-            isUserIDInDB = false;
-        }
+        });
 
 
         // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
         ImageButton imageButton = findViewById(R.id.button1);
-        boolean finalIsUserIDInDB1 = isUserIDInDB;
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(intent);
 
                 if(btConnect != null && btConnect.isBluetoothConnect()) {
-                    if (finalIsUserIDInDB1) {
+                    if (mIsUserIDInDB) {
                         if (btThread == null) {
                             btThread = btConnect.btThread;
                         }
@@ -89,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         // 밝기 조정 버튼 눌렀을 때 ControlLightActivity activity로 이동
         ImageButton imageButton2 = findViewById(R.id.button2);
-        boolean finalIsUserIDInDB2 = isUserIDInDB;
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(btConnect != null && btConnect.isBluetoothConnect()) {
-                    if (finalIsUserIDInDB2) {
+                    if (mIsUserIDInDB) {
                         if (btThread == null) {
                             btThread = btConnect.btThread;
                         }
