@@ -28,6 +28,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
+import com.example.autolight_android.MainActivity;
 import com.example.autolight_android.R;
 import com.example.autolight_android.database.DBHelper;
 import com.example.autolight_android.database.StandardItem;
@@ -46,6 +47,7 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
     private DBHelper mDBHelper;
     private StandardItem mStandardItem;
+    private int mUserID;
     private int mLampDial;
 
     public static Boolean mIsStart;
@@ -76,6 +78,15 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        mUserID = intent.getIntExtra("UserID", -1);
+
+        if (mUserID == -1) {
+            Toast.makeText(ControlLightActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+
         // start
         mIsStart = false;
 
@@ -90,8 +101,13 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
 
         mDBHelper = new DBHelper(this);
-        mStandardItem = mDBHelper.getStandard();
+        mStandardItem = mDBHelper.getStandard(mUserID);
         mLampDial = 65;
+
+        if (mStandardItem == null) {
+            Toast.makeText(ControlLightActivity.this, "해당 사용자가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         btThread.write(String.valueOf(mLampDial) + "c");
         Toast.makeText(getApplicationContext(), String.valueOf(mStandardItem.getStLight()), Toast.LENGTH_SHORT).show();

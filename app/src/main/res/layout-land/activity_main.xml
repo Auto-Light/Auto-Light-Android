@@ -184,8 +184,10 @@
         android:layout_height="52dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="사용자 ID를 입력해주세요"
+        android:hint="사용자 ID를 입력해주세요(1~10)"
         android:inputType="number"
+        android:textColor="#3E3E3E"
+        android:textColorHint="#E4716D6D"
         app:layout_constraintEnd_toEndOf="@+id/rectangle"
         app:layout_constraintStart_toStartOf="@+id/rectangle"
         app:layout_constraintTop_toTopOf="parent" />

@@ -2,6 +2,7 @@ package com.example.autolight_android.customize_standard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Build;
@@ -29,6 +30,7 @@ import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
 
 import com.example.autolight_android.R;
+import com.example.autolight_android.control_light.ControlLightActivity;
 import com.example.autolight_android.database.DBHelper;
 import com.example.autolight_android.database.StandardItem;
 
@@ -44,7 +46,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     private CameraBridgeViewBase mOpenCvCameraView;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
     private DBHelper mDBHelper;
-    private StandardItem mStandardItem;
+    private int mUserID;
 
     static {
         System.loadLibrary("native-lib");
@@ -67,6 +69,14 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        mUserID = intent.getIntExtra("UserID", -1);
+
+        if (mUserID == -1) {
+            Toast.makeText(CustomizeStandardActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -78,7 +88,6 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
         mOpenCvCameraView.setCameraIndex(CAMERA_ID_FRONT);
 
         mDBHelper = new DBHelper(this);
-        mStandardItem = mDBHelper.getStandard();
 
         SeekBar seekBar = findViewById(R.id.seekBar);
         TextView seekText = findViewById(R.id.seekText);
@@ -257,7 +266,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
             @Override
             public void onClick(View view) {
                 if (stLight > -1) {
-                    mDBHelper.updateStLight(mStandardItem.getId(), stLight);
+                    mDBHelper.updateStLight(mUserID, stLight);
                     Toast.makeText(getApplicationContext(), "기준 밝기값(" + stLight + ")을 저장했습니다.", Toast.LENGTH_SHORT).show();
 
                     finish();
