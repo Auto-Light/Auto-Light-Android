@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     mUserID = Integer.parseInt(editTextUserID.getText().toString());
 
                     if (mUserID > 0 && mUserID < 11) {
+                        Toast.makeText(MainActivity.this, "사용자" + mUserID + " 로그인", Toast.LENGTH_SHORT).show();
                         mIsUserIDInDB = true;
                     }
                 }

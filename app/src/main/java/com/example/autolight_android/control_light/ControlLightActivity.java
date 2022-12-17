@@ -27,6 +27,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
+import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_BACK;
 
 import com.example.autolight_android.MainActivity;
 import com.example.autolight_android.R;
@@ -49,8 +50,10 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
     private StandardItem mStandardItem;
     private int mUserID;
     private int mLampDial;
-    private int mFrameCount = 0;
-    private int mNowLightSum = 0;
+    private int mFrameCount;
+    private int mNowLightSum;
+    private int m25Count;
+    private int m100Count;
 
     public static Boolean mIsStart;
 
@@ -104,7 +107,13 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
 
         mDBHelper = new DBHelper(this);
         mStandardItem = mDBHelper.getStandard(mUserID);
-        mLampDial = 65;
+        mLampDial = 25;
+
+        mFrameCount = 0;
+        mNowLightSum = 0;
+
+        m25Count = 0;
+        m100Count = 0;
 
         if (mStandardItem == null) {
             Toast.makeText(ControlLightActivity.this, "해당 사용자가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
@@ -287,22 +296,22 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
         int stLight = mStandardItem.getStLight();
         int nowLight = getFacelight(cascadeClassifier_face, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
 
-        mFrameCount++;
-        if (nowLight > -1) {
-            mNowLightSum += nowLight;
-        }
 
         if (mIsStart) {
-            // 얼굴 추출이 된 경우
-            if (mFrameCount == 30) {
-                mFrameCount = 0;
+            if (nowLight > -1) {
+                mFrameCount++;
+                mNowLightSum += nowLight;
+            }
 
-                int nowLightMean = mNowLightSum / 30;
-
+            if (mFrameCount == 10) {
+                int nowLightMean = mNowLightSum / 10;
                 int diffLight = Math.abs(stLight - nowLightMean);
 
-                // 적정 밝기로 조명 조절을 완료한 경우
-                if (diffLight < 5) {
+                mFrameCount = 0;
+                mNowLightSum = 0;
+
+                // 조명 조절을 완료한 경우
+                if (diffLight < 1 || m25Count > 5 || m100Count > 5) {
                     nEnd = System.currentTimeMillis();
 
                     // 팝업 띄우기
@@ -321,31 +330,13 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                 }
 
                 // 조명 밝기를 더이상 조절할 수 없는 경우
-                if (mLampDial < 25) {
-                    mLampDial = 25;
-                    /*
-                    nEnd = System.currentTimeMillis();
-
-                    // 팝업 띄우기
-                    Intent intent = new Intent(this, PopUpDialogActivity.class);
-                    intent.putExtra("data", "더이상 조명 밝기를 낯출 수 없습니다." + nowLight);
-                    intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
-                    startActivityForResult(intent, 1);
-
-                     */
-                } else if (mLampDial > 100) {
-                    mLampDial = 100;
-                    /*
-                    nEnd = System.currentTimeMillis();
-
-                    // 팝업 띄우기
-                    Intent intent = new Intent(this, PopUpDialogActivity.class);
-                    intent.putExtra("data", "더이상 조명 밝기를 높일 수 없습니다." + nowLight);
-                    intent.putExtra("time", "실행시간 : " + (nEnd - nStart) + "ms");
-                    startActivityForResult(intent, 1);
-
+                if (mLampDial <= 25) {
+                    mLampDial = 26;
+                    m25Count++;
                 }
-                     */
+                else if (mLampDial >= 100) {
+                    mLampDial = 99;
+                    m100Count++;
                 }
             }
         }

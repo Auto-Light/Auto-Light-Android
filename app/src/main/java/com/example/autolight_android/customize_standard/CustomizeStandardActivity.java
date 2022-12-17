@@ -28,6 +28,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import static com.example.autolight_android.MainActivity.btThread;
 import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
+import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_BACK;
 
 import com.example.autolight_android.R;
 import com.example.autolight_android.control_light.ControlLightActivity;
@@ -254,12 +255,12 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat inputMat = inputFrame.rgba();
+        Mat resultMat = null;
 
-        Mat matResult = null;
-        if ( matResult == null )
-            matResult = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
+        if ( resultMat == null )
+            resultMat = new Mat(inputMat.rows(), inputMat.cols(), inputMat.type());
 
-        int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), matResult.getNativeObjAddr());
+        int stLight = getFacelight2(cascadeClassifier_face,inputMat.getNativeObjAddr(), resultMat.getNativeObjAddr());
 
         ImageButton okButton = findViewById(R.id.ok_button);
         okButton.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +278,7 @@ public class CustomizeStandardActivity extends AppCompatActivity implements Came
             }
         });
 
-        return matResult;
+        return resultMat;
     }
 
 }
