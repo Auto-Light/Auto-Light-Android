@@ -303,8 +303,8 @@ public class ControlLightActivity extends AppCompatActivity implements CameraBri
                 mNowLightSum += nowLight;
             }
 
-            if (mFrameCount == 10) {
-                int nowLightMean = mNowLightSum / 10;
+            if (mFrameCount == 5) {
+                int nowLightMean = mNowLightSum / 5;
                 int diffLight = Math.abs(stLight - nowLightMean);
 
                 mFrameCount = 0;
