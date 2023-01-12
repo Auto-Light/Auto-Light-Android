@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper{
-    private static final int DB_VERSION = 4; // 버전 3으로 업데이트
+    private static final int DB_VERSION = 5; // 버전 5로 업데이트
     private static final String DB_NAME = "standard.db";
 
     public DBHelper(@Nullable Context context) {
@@ -18,8 +18,17 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Standard (id INTEGER PRIMARY KEY AUTOINCREMENT, stLight INTEGER NOT NULL)");
-        db.execSQL("INSERT INTO Standard (stLight) VALUES(128);"); // 초기화
+        db.execSQL("CREATE TABLE IF NOT EXISTS Standard (id INTEGER PRIMARY KEY, stLight INTEGER NOT NULL)");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(1, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(2, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(3, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(4, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(5, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(6, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(7, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(8, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(9, 128);");
+        db.execSQL("INSERT INTO Standard (id, stLight) VALUES(10, 128);");
     }
 
     @Override
@@ -29,10 +38,11 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     // SELECT문 - 기준 조명 밝기값, 최근 조명 다이얼값 가져오기
-    public StandardItem getStandard() {
+    public StandardItem getStandard(int _id) {
+        String userID = Integer.toString(_id);
         StandardItem standardItem = new StandardItem();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Standard ORDER BY id ASC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Standard WHERE id = ?;", new String[]{userID});
 
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
@@ -43,8 +53,12 @@ public class DBHelper extends SQLiteOpenHelper{
                 standardItem.setStLight(stLight);
             }
         }
-        cursor.close();
+        else {
+            cursor.close();
+            return null;
+        }
 
+        cursor.close();
         return standardItem;
     }
 

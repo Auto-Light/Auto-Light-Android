@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothConnect btConnect;
     @SuppressLint("StaticFieldLeak")
     public static ConnectedThread btThread;
+    private int mUserID = -1;
+    private boolean mIsUserIDInDB = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,32 @@ public class MainActivity extends AppCompatActivity {
 
         permissionCheck();
 
+        // 사용자 ID 입력받기
+        Button insertButton = findViewById(R.id.insertButton);
+        insertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editTextUserID = (EditText)findViewById(R.id.editTextUserID);
+
+                try {
+                    mUserID = Integer.parseInt(editTextUserID.getText().toString());
+
+                    if (mUserID > 0 && mUserID < 11) {
+                        Toast.makeText(MainActivity.this, "사용자" + mUserID + " 로그인", Toast.LENGTH_SHORT).show();
+                        mIsUserIDInDB = true;
+                    }
+                }
+                catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
+                    mIsUserIDInDB = false;
+                }
+                catch (Exception e) {
+                    mIsUserIDInDB = false;
+                }
+            }
+        });
+
+
         // 기준값 설정 버튼 눌렀을 때 setting activity로 이동
         ImageButton imageButton = findViewById(R.id.button1);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -45,12 +75,18 @@ public class MainActivity extends AppCompatActivity {
                 //Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
                 //startActivity(intent);
 
-                if(btConnect != null && btConnect.isBluetoothConnect()){
-                    if(btThread == null){
-                        btThread = btConnect.btThread;
+                if(btConnect != null && btConnect.isBluetoothConnect()) {
+                    if (mIsUserIDInDB) {
+                        if (btThread == null) {
+                            btThread = btConnect.btThread;
+                        }
+                        Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
+                        intent.putExtra("UserID", mUserID);
+                        startActivity(intent);
                     }
-                    Intent intent = new Intent(getApplicationContext(), CustomizeStandardActivity.class);
-                    startActivity(intent);
+                    else {
+                        Toast.makeText(MainActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(MainActivity.this, "블루투스 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
@@ -68,12 +104,18 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(intent);
 
 
-                if(btConnect != null && btConnect.isBluetoothConnect()){
-                    if(btThread == null){
-                        btThread = btConnect.btThread;
+                if(btConnect != null && btConnect.isBluetoothConnect()) {
+                    if (mIsUserIDInDB) {
+                        if (btThread == null) {
+                            btThread = btConnect.btThread;
+                        }
+                        Intent intent = new Intent(getApplicationContext(), ControlLightActivity.class);
+                        intent.putExtra("UserID", mUserID);
+                        startActivity(intent);
                     }
-                    Intent intent = new Intent(getApplicationContext(), ControlLightActivity.class);
-                    startActivity(intent);
+                    else {
+                        Toast.makeText(MainActivity.this, "유효한 사용자 ID가 아닙니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(MainActivity.this, "블루투스 연결이 필요합니다.", Toast.LENGTH_SHORT).show();

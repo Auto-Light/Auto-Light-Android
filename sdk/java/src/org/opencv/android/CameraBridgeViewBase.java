@@ -87,7 +87,7 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
         if (isFrontCamera){
             mMatrix.preRotate(0); // 실제 디바이스
         } else {
-            mMatrix.preRotate(90);
+            mMatrix.preRotate(0);
         }
 
         mMatrix.preTranslate(-hw, -hh);
